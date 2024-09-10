@@ -1,0 +1,964 @@
+\begin{exercise}\exelab{1.1}
+    Prove that the Cantor set $C$ is totally disconnected and 
+    perfect.
+\end{exercise}
+\begin{pf}
+    $\forany x,y\in C$, $\exist k$ such that $3^{-k}<\abs{x-y}$. 
+    Thus $x,y$ must belong to two different segments in $C_k$ 
+    and hence there exist some $z\not\in C$ lies between $x,y$. 
+    This proves that $C$ is totally disconnected. To see that 
+    $C$ is perfect, for any fix $x\in C$, note that for any 
+    $\epsilon>0$, pick $k$ such that $3^{-k}<\epsilon$. Then 
+    there exists a segments of $C_k$ with length $3^{-k}$ 
+    containing $x$. Choose $y$ from the segment and then 
+    $\abs{x-y}\leq 3^{-k}<\epsilon$. This completes the proof.
+\end{pf}
+
+\begin{exercise}\exelab{1.2}
+    The Cantor set $C$ can also be described in terms of ternary 
+    expressions. 
+    \begin{thmenum}
+        \item Every number in $[0,1]$ has a ternary expansion
+        \[
+            x = \sum_{k=1}^\infty a_k3^{-k},
+            \quad\text{where $a_k = 0,1,2$.}
+        \]
+        Prove that $x\in C$ if and only if $x$ has a 
+        representation as above where $a_k = 0,2$.
+        \item The \textbf{Cantor-Lebesgue function} is defined 
+        on $C$ by
+        \[
+            F(x) = \sum_{k=1}^\infty \frac{b_k}{2^k} 
+            \quad\text{if $x = \sum_k a_k3^{-k}$, where 
+            $b_k = \frac{1}{2}a_k$.}
+        \]
+        We choose the representation that $a_k=0,2$ in the 
+        definition. Show that $F$ is well-defined and continuous 
+        on $C$; moreover, $F(0) = 0$ and $F(1)=1$.
+        \item Prove that $F:C\to[0,1]$ is surjective.
+        \item $F$ can be extended to a function on $[0,1]$ as 
+        follows. For $x$ in the complement of $C$, $x$ must lie 
+        in some open interval $(a,b)$ with $F(a) = F(b)$. Let 
+        $F(x) = F(a)$ for such $x$. Show that $F$ is continuous 
+        on $[0,1]$. 
+    \end{thmenum}
+\end{exercise}
+\begin{pf}
+    For (a), we know that $C = \bigcap_k C_k$, where $C_k$ is 
+    the union of closed segments. Thus in every step, we remove 
+    the middle and hence all the $a_k=1$. Note that those 
+    numbers with non-unique representations are the terminated 
+    points and the segments removed are open sets. Furthermore, 
+    such representation is unique if we restrict our choice of 
+    $a_k$ to be 0 or 2 for $x\in C$. To see this, let $a_k$ be 
+    the first digit that differs from $a'_k$ with $a_k>a'_k$. 
+    Then we have $a_k-a'_k = 2 = \sum_{n=k+1}^\infty3^{-n}
+    (a'_n-a_n) \leq 3^{-k}$, 
+    which is absurd. Hence the representation must be unique.
+
+    For (b), by the uniqueness of such representation, $F$ is 
+    well-defined. Let $x_n\to x\in C$. For any 
+    $\epsilon>0$, $\exist N$ such that $2^{-N+1}<\epsilon$. 
+    Pick $x_n$ such that the first digit in its representation 
+    that differs from $x$ occurs after $N$. Then 
+    $\abs{F(x_n)-F(x)} \leq \sum_k 2^{-k-1}\abs{a^n_k-a_k} 
+    \leq \sum_{k\geq N} 2^{-k} = 2^{-N+1}<\epsilon$. Hence $F$ 
+    is continuous on $C$. Furthermore, $F(1) = 1$ since 
+    $1=\sum_k2^{-k}\times1$ and $F(0) = 0$ since 
+    $0=\sum_k2^{-k}\times0$.
+
+    To see (c), note that every number has a binary 
+    representation and thus $F$ is surjective.
+
+    Finally, for (d), we have shown that $F$ is continuous on 
+    $C$. Observe that $F$ is a piecewise function continuous at 
+    each terminated points and constant functions are continuous. 
+    We conclude that the extended $F$ is continuous on $[0,1]$. 
+\end{pf}
+
+\begin{exercise}\exelab{1.3}
+    Consider a unit interval $[0,1]$, and let $\xi$ be a fixed 
+    real number with $\xi\in(0,1)$. $C_\xi$ is defined
+    iteratively as follows. $C_0 = [0,1]$. At the $n$-th step,
+    $C_n$ is obtained by removing the open middle interval of
+    length $\xi$ proportion from each of the closed intervals 
+    in $C_{n-1}$. 
+    \begin{thmenum}
+        \item Prove that $C_\xi^c$ in $[0,1]$ is the union of 
+        open intervals of total length 1.
+        \item Show directly that $m^*(C_\xi) = 0$. 
+    \end{thmenum}
+\end{exercise}
+\begin{pf}
+    For (a), let $A_n$ be the complement of $C_n$ in $[0,1]$. 
+    Then $A_n = A_{n-1}\dot{\bigcup} B_n$, where $B_n$ is the
+    union of newly removed open intervals, which are of length
+    $(1-\xi)^{n-1}\xi$. $A_0 = \varnothing$. Thus $m(A_n) = 
+    (1-\xi)^{n-1}\xi + m(A_{n-1}) = \sum_{k\leq n}(1-\xi)^{k-1}\xi 
+    \to 1$. 
+
+    For (b), observe that $C_n\subset C_{n-1}$ and $C_n$ are 
+    essentially the union of $2^n$ disjoint intervals of length 
+    $(2(1-\xi))^{-n}$. Thus $m^*(C_n) = (1-\xi)^{-n}$ and then
+    $m^*(C_\xi)\leq m^*(C_n) = (1-\xi)^{-n} \to 0$ as 
+    $n\to\infty$. Hence $m^*(C_\xi) = 0$.
+\end{pf}
+
+\begin{exercise}\exelab{1.4}
+    Construct a closed set $\hat{C}$ so that at the $k$-th step,
+    one removes $2^{k-1}$ central open intervals each of length 
+    $l_k$, with $l_1 + 2l_2 + \cdots + 2^{k-1}l_k < 1$ for any 
+    $k$. 
+    \begin{thmenum}
+        \item If $l_j$ are chosen small enough, then 
+        $\sum_k 2^{k-1}l_k < 1$. In this case, show that 
+        $m(\hat{C}) = 1 - \sum_k 2^{k-1}l_k$.
+        \item Show that if $x\in\hat{C}$, then there exists a 
+        sequence of points $x_n$ such that $x_n\not\in\hat{C}$, 
+        yet $x_n\to x$ and $x_n\in I_n$, where $I_n$ is a 
+        subinterval in the complement of $\hat{C}$ with 
+        $\abs{I_n}\to 0$.
+        \item Prove that $\hat{C}$ is perfect and contains no 
+        open intervals. 
+        \item Show that $\hat{C}$ is uncountable.
+    \end{thmenum}
+\end{exercise}
+\begin{pf}
+    For (a), we again note that $\hat{C} = \bigcap_n C_n$, 
+    where $C_n$ is the union of closed intervals with total 
+    length $m(C_n) = m(C_{n-1})-2^{n-1}l_n$ and $m(C_0) 
+    = [0,1]$. Also, $C_n\searrow\hat{C}$ and hence $m(\hat{C}) 
+    = \lim_n m(C_n) = 1 - \sum_k 2^{k-1}l_k$.
+
+    To prove (b), let $\epsilon>0$ be given. A subinterval in 
+    $C_n$ is of length $2^{-n}(1 - \sum_{k=1}^n 2^{k-1}l_k)$. 
+    Then $x_n$ can be chosen from the interval removed in 
+    $n+1$-th step in the subinterval containing $x$. By our 
+    construction, $x_n\not\in\hat{C}$. Since $x_n$ and $x$ lie
+    in the same subinterval of $C_n$, $\abs{x_n-x}<\epsilon$ 
+    for any $n\geq N$, where $N$ is chosen such that 
+    $2^{-N}(1 - \sum_{k=1}^N 2^{k-1}l_k) < \epsilon$. 
+    Furthermore $\abs{I_n}=l_n\to 0$ as $n\to\infty$ since 
+    $\sum_{k=1}^\infty 2^{k-1}l_k<\infty$, which implies that 
+    $l_k\to 0$ as $k\to\infty$.
+
+    To prove (c), note that for any 
+    $x\in\hat{C}$, we may pick $x_n\in C_n$, where $x_n$ is 
+    the terminated point of the subinterval containing $x$. 
+    Then $\abs{x_n-x}\leq 2^{-n}(1 - \sum_{k=1}^n 2^{k-1}l_k)
+    \to 0$ as $n\to\infty$. Hence $\hat{C}$ is perfect. Also, 
+    $\hat{C}$ contains no open intervals since the 
+    subintervals in $C_n$ have length 
+    $2^{-n}(1 - \sum_{k=1}^n 2^{k-1}l_k)$, which can be 
+    arbitrarily small for large $n$.
+
+    Finally, for (d), if $\sum_{k=1}^{\infty}2^{k-1}l_k<1$,
+    since $m(\hat{C})\neq 0$, $\hat{C}$ must be uncountable.
+    In general, for the case where 
+    $\sum_{k=1}^{\infty}2^{k-1}l_k=1$, we may construct the 
+    bijection to a fat Cantor set, which has each removed 
+    intervals with same center but with length $rl_k<l_k$. 
+    Such function is essentially a scalar multiplication and
+    hence a bijection. But any fat Cantor set is uncountable.
+    Hence so is any thin Cantor set.
+\end{pf}
+
+\begin{exercise}\exelab{1.5}
+    Suppose $E$ is a given set and $O_n = \Set{x}{d(x,E)<1/n}$.
+    \begin{thmenum}
+        \item Show that if $E$ is compact, then $m(E)
+        =\lim_{n\to\infty}m(O_n)$.
+        \item Construct the counterexamples for which 
+        $E$ is closed but unbounded and $E$ is bounded but open.
+    \end{thmenum}
+\end{exercise}
+\begin{pf}
+    If $E$ is compact, then $E$ is bounded, closed and hence 
+    measurable. Notice that $O_n$ is open and bounded. We 
+    claim that $O_n\searrow E$. Indeed, $O_n\supset O_{n+1}
+    \supset E$. Also, for any $x\in O_n-E$, let $d = d(x,E)$.
+    Then pick $N$ such that $1/N<d$. Then $x\not\in O_N$ and 
+    hence $x\not\in O_n$. We conclude that $O_n\searrow E$.
+    Thus $m(O_n)\to m(E)$ as $n\to \infty$.
+
+    To construct the counterexamples, let 
+    $E = \Set{s_n}{s_n=2\sum_{k=1}^{n}1/k,n\in\N}$. Then $E$ 
+    is closed since every point in $E$ is a isolated point. 
+    For any $n$, $O_n \supset (s_n-1/n,\infty]$, which has 
+    an infinite measure. Thus $m(O_n)=\infty$ for all $n$.
+    Hence $m(E)\neq\lim_{n\to\infty}m(O_n)$. For the second
+    counterexample, let $r_k$ denote all rational numbers in 
+    $(0,1)$. $E$ is the union of 
+    $(r_k-2^{-k}\epsilon,r_k+2^{-k}\epsilon)$, where 
+    $\epsilon\in(0,1)$. Then $E$ is bounded but open with 
+    $m(E)\leq\sum_{k=1}^{\infty}2^{-k}\epsilon = \epsilon$. 
+    However, since $r_k$ is dense in $(0,1)$, $O_n\supset
+    (0,1)$ and hence $m(O_n)\geq 1$ for all $n$. Thus $m(E)
+    \neq\lim_{n\to\infty}m(O_n)$.
+\end{pf}
+
+\begin{exercise}\exelab{1.6}
+    Let $B$ be a ball in $\R^d$ of radius $r$. Prove that 
+    $m(B) = v_d r^d$, where $v_d = m(B_1)$ and $B_1$ is the 
+    unit ball centered at the origin with radius $1$.
+\end{exercise}
+\begin{pf}
+    By translation and dilation, we know that $B = rB_1+b$ 
+    for some $b$. Then $m(B) = r^dm(B_1) = v_d r^d$. 
+\end{pf}
+
+\begin{exercise}\exelab{1.7}
+    Let $\delta\in\R^d_+$ and $E\subset\R^d$. $\delta E$ is 
+    defined as $\Set{(\delta_1x_1,\ldots,\delta_dx_d)}{x\in E}$. 
+    Prove that $\delta E$ is measurable if $E$ is measurable, 
+    and $m(\delta E) = \delta_1\cdots\delta_dm(E)$.
+\end{exercise}
+\begin{pf}
+    For any measurable $E\subset\R^d$, $\exist V$ open such
+    that $E\subset V$ and $m(V-E)<\epsilon$. Let $V-E$ be 
+    covered by a sequence of rectangles $R_n$ with 
+    $\sum_n m(R_n) < \epsilon$. Furthermore, $\delta V$ is 
+    also open since it is a linear transformation and hence 
+    continuous. Also, $\delta V-\delta E$ is covered by 
+    $\bigcup_n \delta R_n$ and $m(\delta V- \delta E)
+    = m(\delta (V-E)) \leq m(\delta \bigcup_n R_n) 
+    = m(\bigcup_n\delta R_n) = \sum_n m(\delta R_n) 
+    = \sum_n \delta_1\cdots\delta_d m(R_n) 
+    < \delta_1\cdots\delta_d\epsilon$. Since $\epsilon$ is
+    arbitrarily small, $\delta E$ is measurable. Moreover, 
+    if $Q_n$ is a sequence of rectangles covering $E$ with 
+    $m(E)\leq\sum_n Q_n < \epsilon$, then
+    $\delta Q_n$ is a sequence of rectangles covering 
+    $\delta E$ with $\sum_n m(\delta Q_n) 
+    = \delta_1\cdots\delta_d\sum_n m(Q_n) 
+    < \delta_1\cdots\delta_d(m(E) + \epsilon)$. Since 
+    $\epsilon$ is arbitrarily small, $m(\delta E) 
+    = \delta_1\cdots\delta_d m(E)$. 
+\end{pf}
+
+\begin{exercise}\exelab{1.8}
+    Suppose $T$ is a linear transformation in $\R^d$ and $E$
+    is a measurable set in $\R^d$. Prove that $T(E)$ is 
+    measurable.
+\end{exercise}
+\begin{pf}
+    If $E$ is compact, then so is $T(E)$ since $T$ is linear 
+    and hence continuous. Thus if $E$ is an $F_\sigma$ set, 
+    then $T(E)$ is also an $F_\sigma$ set. This follows from 
+    the fact that an $F_\sigma$ set is the countable union of
+    compact sets. Next, since $T$ is linear, $\exist M$ 
+    such that $\abs{T(x')-T(x)}\leq M\abs{x'-x}$ for any 
+    $x,x'\in\R^d$. Then $T$ maps any cube of side length $l$
+    into a cube of side length $2Ml$. Now suppose that $E$ is 
+    a set of measure zero. Let $Q_n$ be a sequence of cubes 
+    covering $E$ with $\sum_n m(Q_n)<\epsilon$. Then 
+    $m^*(T(E))\leq\sum_n m^*(T(Q_n))\leq 2^dM^d\epsilon$ for 
+    arbitrarily small $\epsilon$. Hence $T(E)$ is measurable 
+    with measure zero. Finally, for any measurable set $E$,
+    $\exist F$ closed such that $m(E\Delta F) = 0$. Then 
+    $m(T(E)\Delta T(F)) = m(T(E\Delta F)) = 0$ and hence 
+    $T(E)$ is measurable.
+\end{pf}
+
+\begin{exercise}\exelab{1.9}
+    Find an open set $V$ such that $\partial \overline{V}$ has 
+    positive Lebesgue measure.
+\end{exercise}
+\begin{pf}
+    Consider the complement of a fat Cantor set in $[0,1]$ 
+    obtained by letting $l_k = 4^{-k}$, denoted as $V$. 
+    Being an union of open intervals, $V$ is open. Note that 
+    $V$ by \exeref{1.4}, $V'$ contains the fat Cantor set. 
+    Then $\partial \overline{V} = V'-V$ also contains the fat
+    Cantor set and hence has positive measure.
+\end{pf}
+
+\begin{exercise}\exelab{1.10}
+    Construct a decreasing sequence of continuous functions 
+    $f_n\to f$ defined on $[0,1]$ while $f$ is not Riemann 
+    integrable.
+\end{exercise}
+\begin{pf}
+    Consider the removed intervals $V_n$ in each step in the 
+    construction of a fat Cantor set $\hat{C}$ with 
+    $l_n = 4^{-n}$. Let $I^k_n$ be the sub-intervals of $V_n$. 
+    Define 
+    \[
+        F_n(x) = \begin{cases}
+            1 & \text{$x\not\in V_n$},\\
+            2\times4^n\abs{x-p^k_n} & \text{$x\in I^k_n$},
+        \end{cases}
+    \]
+    where $p^k_n$ is the center of $I^k_n$. Then $F_n$ is 
+    continuous. Put $f_n = \prod_{i=1}^{n}F_i$. Then $f_n$ is
+    devreasing and continuous. Let $f_n\to f$ pointwisely. $f$
+    exists since for any $x$, $f_n(x)$ is a decreasing 
+    sequence bounded below. Now we claim that $f$ is 
+    discontinuous on $\hat{C}$. Indeed, let $\epsilon = 1/2$ 
+    be given. For any $x\in\hat{C}$, any neighborhood of $x$ 
+    contains some $I^k_n$ and hence $\exist x'\in I^k_n$ such 
+    that $f(x') = 0$ and thus $\abs{f(x)-f(x')} = 1>\epsilon$.
+    The claim thus follows. However, by \exeref{1.4}, 
+    $\hat{C}$ has positive measure and hence $f$ has positive
+    measure of discontinuity. Thus $f$ is not Riemann 
+    integrable.
+\end{pf}
+
+\begin{exercise}\exelab{1.11}
+    Let $A$ contains all numbers in $[0,1]$ whose decimal 
+    expansion contains no digit $4$. Find $m(A)$.
+\end{exercise}
+\begin{pf}
+    Let $B_n$ consist of all numbers in $[0,1]$ in which the 
+    first $4$ appears at the $n$-th decimal place. Then we 
+    have $A^c = \dot{\bigcup_n} B_n$ and every $B_n$ is simply
+    the union of $9^{n-1}$ disjoint open intervals of length 
+    $10^{-n}$. Thus $m(A) = 1 - \sum_{n=1}^{\infty} 
+    9^{n-1}10^{-n} = 1 - \frac{1}{10}\sum_{n=0}^{\infty} 
+    \pth{\frac{9}{10}}^n = 8/9$.  
+\end{pf}
+
+\begin{exercise}\exelab{1.12}
+    \begin{thmenum}
+        \item Let $D$ be an open disc in $\R^2$ and $E$. Prove 
+        that $D$ is not the disjoint union of open rectangles.
+        \item Prove that an open connected set $\Omega$ is the 
+        disjoint union of open rectangles if and only if $\Omega$
+        is an open rectangle.
+    \end{thmenum}
+\end{exercise}
+\begin{pf}
+    (a) is proved by (b); hence we dive straight into (b). In 
+    (b), the necessity is trivial. For the sufficiency, if not,
+    then $\Omega$ must be composed of at least two disjoint 
+    open sets. However, since $\Omega$ is connected, it cannot
+    be separated into two disjoint open sets. This poses a 
+    contradiction and hence $\Omega$ must be an open rectangle. 
+\end{pf}
+
+\begin{exercise}\exelab{1.13}
+    \begin{thmenum}
+        \item Show that a closed set is a $G_\delta$ set and 
+        an open set is an $F_\sigma$ set.
+        \item Give an example of an $F_\sigma$ set which is 
+        not a $G_\delta$ set. 
+        \item Give an example of a Borel set which is not a 
+        $G_\delta$ set nor an $F_\sigma$ set.
+    \end{thmenum}
+\end{exercise}
+\begin{pf}
+    To see (a), let $F$ be a closed set. Consider $V_n 
+    = \Set{x}{d(x,F)<1/n}$. Then $F = \bigcap_n V_n$ since 
+    for any $x\in V_n-F$, $d(x,F)\geq \epsilon>0$ for some
+    $\epsilon$. But $\exist N$ such that $1/N<\epsilon$ and 
+    $x\not\in V_N$. Thus $F$ is a $G_\delta$ set. If $G$ is 
+    open, $G^c$ is closed and hence a $G_\delta$ set. By 
+    picking the complement of $V_n$, $G$ is an $F_\sigma$ 
+    set.
+
+    For (b), consider $\Q$. Since $\Q$ is countable, 
+    $\Q = \bigcup_{q\in\Q}\{q\}$ is an $F_\sigma$ set. We now
+    claim that it is not a $G_\delta$ set. If $\Q$ is a 
+    $G_\delta$ set, then $\Q = \bigcap_n V_n$ for open sets 
+    $V_n$. Consider $U_n = V_n-q_n$, where $q_n$ denumerates 
+    all rational numbers. Then $U_n$ is dense in $\R$ for each 
+    $n$. By \thmref{A.1}, $\bigcap_n U_n$ is dense in $\R$. 
+    However, $\pth{\bigcap_n V_n}-\Q = \bigcap_n U_n 
+    = \varnothing$, which is absurd. Hence $\Q$ is not a 
+    $G_\delta$ set.
+
+    For (c), pick $E = (\Q\bigcap\R_+)\bigcup(\Q^c\bigcap\R_-)$.
+    Then $E$ is a Borel set since $\Q$ is an $F_\sigma$ set and 
+    hence a Borel set. Note that $\Q^c$ is not an $F_\sigma$ 
+    set since if it is, then $\Q$ is a $G_\delta$ set. But we 
+    have just shown that $\Q$ is not a $G_\delta$ set. Thus 
+    $\Q^c$ is not an $F_\sigma$ set. Hence $E$ is neither a 
+    $G_\delta$ set nor an $F_\sigma$ set while still a Borel 
+    set.
+\end{pf}
+
+\begin{exercise}\exelab{1.14}
+    The \textbf{outer Jordan content} of a set $E\subset\R$ is 
+    defined by
+    \[
+        J^*(E) = \inf\sum_{n=1}^{N}\abs{I_n},
+    \]
+    where the infimum is taken over all finite covering 
+    rectangles $\brc{I_n}$.
+    \begin{thmenum}
+        \item Prove that $J^*(E) = J^*(\overline{E})$.
+        \item Find a set $E$ such that $J^*(E) = 1$ while 
+        $m^*(E) = 0$.
+    \end{thmenum}
+\end{exercise}
+\begin{pf}
+    For (a), it is clear that if $\brc{I_n}$ is a cover 
+    consisting of rectangles of $E$, then $E\subset\overline{E}
+    \subset\bigcup_{n=1}^N I_n$ as long as $I_n$ are chosen to 
+    be closed. Thus by definition we can pick $\brc{I_n}$ such 
+    that $J^*(E)\leq J^*(\overline{E})\leq
+    \sum_{n=1}^{N}\abs{I_n} < J^*(E)+\epsilon$ 
+    for arbitrarily small $\epsilon$. The first inequality 
+    comes from the fact that any cover of a set is also a cover
+    of any of its subset. Then it follows that $J^*(E) 
+    = J^*(\overline{E})$.
+
+    For (b), consider $E = \Q\cap[0,1]$. Then $J^*(E) = 1$ 
+    since $E$ is dense in $[0,1]$ and hence any finite cover 
+    of $E$ must cover $[0,1]$. Thus $J^*(E) = 1$. On the other 
+    hand, $m^*(E) = 0$ since $E$ is a countable set. 
+\end{pf}
+
+\begin{exercise}\exelab{1.15}
+    Define $m^*_R(E)$ by considering the infimum of volumes 
+    among all countable rectangles covering $E$. Prove that 
+    $m^*_R(E) = m^*(E)$ for any $E\subset\R^d$.
+\end{exercise}
+\begin{pf}
+    Let $I_n$ be a sequence of rectangles covering $E$ with
+    $\sum_n \abs{I_n} < m^*_R(E)+\epsilon$. Then by extending 
+    their borders and subdividing, we obtain a sequence of 
+    almost disjoint cubes $Q_k$ with same total volume. Since 
+    some cubes may be discarded, we have $\sum_k\abs{Q_k}\leq
+    \sum_n \abs{I_n} < m^*_R(E)+\epsilon$. Since $\epsilon$ is
+    arbitrary, $m^*(E)\leq m^*_R(E)$. The reverse inequality 
+    is trivial since every cube is a rectangle.  
+\end{pf}
+
+\begin{exercise}[Borel-Cantelli Lemma]\exelab{1.16}
+    Let $\brc{E_k}$ be a sequence of measurable subsets of 
+    $\R^d$ with $\sum_k m(E_k)<\infty$. Let 
+    \[
+        E = 
+        \Set{x\in\R^d}{x\in E_k\text{ for infinitely many }k}
+        = \limsup_k E_k.
+    \]
+    \begin{thmenum}
+        \item Show that $E$ is measurable.
+        \item Prove that $m(E) = 0$.
+    \end{thmenum}
+\end{exercise}
+\begin{pf}
+    We may write $E$ as $\bigcap_n\bigcup_{k\geq n}E_k$. For 
+    (a), note that $E_k$ is measurable and hence so is their 
+    countable union and countable intersection. 
+
+    Notice that we have $E\subset\bigcup_{k\geq n}E_k$ for all
+    $n$. Then $m(E)\leq m(\bigcup_{k\geq n}E_k)\leq 
+    \sum_{k\geq n}m(E_k)$. Letting $n\to\infty$, we must have 
+    $\sum_{k\geq n}m(E_k)\to 0$ since the series converges. It 
+    follows that $m(E) = 0$.
+\end{pf}
+
+\begin{exercise}\exelab{1.17}
+    Let $f_n$ be a sequence of measurable functions on $[0,1]$ 
+    such that $\abs{f_n(x)}<\infty$ almost everywhere. Show 
+    that $\exist$ a sequence of positive numbers $c_n$ such 
+    that $\frac{f_n(x)}{c_n}\to 0$ almost everywhere.
+\end{exercise}
+\begin{pf}
+    For any fixed $n$, pick $c_n$ such that $E_n = 
+    \Set{x}{\abs{f_n(x)}/c_n > 1/n}$ has measure less than 
+    $2^{-n}$. This is valid since $\abs{f_n(x)}<\infty$ 
+    almost everywhere. Observe that the set of $x$ such that 
+    $\abs{f_n(x)}/c_n\not\to 0$ is a subset of 
+    $E = \limsup_n E_n$. Also, $\sum_n m(E_n)<\sum_n 2^{-n} = 1$.
+    By \exeref{1.16}, $m(E)=0$. Thus $\abs{f_n(x)}/c_n\to 0$ 
+    almost everywhere.
+\end{pf}
+
+\begin{exercise}\exelab{1.18}
+    Prove that every measurable function is the limit of a 
+    sequence of continuous functions almost everywhere.
+\end{exercise}
+\begin{pf}
+    Let the measurable function be $f$ defined on $\R^d$. 
+    We first consider the case where $B_n$ is the closed ball 
+    with radius $n$ centered at the origin and hence has 
+    finite measure. Then by Lusin's theorem, for each $n$, 
+    $\exist F_{2^{-n}}$ closed such that 
+    $m(B_n-F_{2^{-n}})< 2^{-n}$ and $f$ is 
+    continuous on $F_{2^{-n}}$. By \thmref{A.4}, $f$ can be 
+    extended to a continuous function $f_n$ on $\R^d$. Now let 
+    $E_n$ denote the set of $x$ such that $f_n(x)\neq f(x)$ and 
+    $E = \Set{x}{f_n(x)\not\to f}$. If $x\in E$, then 
+    $x\in E_n$ for infinitely many $n$ or $f_n(x)$ would 
+    eventually be equal with $f(x)$ after some large $n$.
+    Observe that $E_n\subset B_n-F_{2^{-n}}$. Thus 
+    $\sum_n m(E_n) < \sum_n m(B_n-F_{2^{-n}})=1$. By 
+    \exeref{1.16}, $m(E) = m(\limsup_n E_n) = 0$. Thus 
+    $f_n\to f$ almost everywhere.
+\end{pf}
+
+\begin{exercise}\exelab{1.19}
+    \begin{thmenum}
+        \item Show that if either $A$ and $B$ is open, then
+        $A+B$ is open.
+        \item Show that if $A$ and $B$ are closed, then $A+B$ 
+        is measurable. 
+        \item Show that $A+B$ might not be closed even if $A$ 
+        and $B$ are closed.
+    \end{thmenum}
+\end{exercise}
+\begin{pf}
+    To prove (a), without loss of generality we may assume 
+    that $A$ is open. Then for $x+y\in A+B$ where $x\in A$ 
+    and $y\in B$, $\exist$ open set $V$ conatining $x$ such 
+    that $V\subset A$. Then $V+y\subset A+B$ and forms a 
+    neighborhood of $x+y$. Thus $A+B$ is open.
+
+    For (b), note that any closed set is a countable union of 
+    compact sets. Next, we show that the sum of two compact 
+    is also compact. Let $K_1$ and $K_2$ be compact. For any 
+    $x_n+y_n\in K_1+K_2$ where $x_n\in K_1$ and $y_n\in K_2$, 
+    $\exist$ convergent subsequences $x_{n_k}\to x\in K_1$ and 
+    thus $y_{n_{k_l}}\to y\in K_2$. Thus $x+y\in K_1+K_2$ is a 
+    limit of a subsequence of $x_n+y_n$. Hence $K_1+K_2$ is 
+    compact. Thus $A+B$ is measurable since it is a countable 
+    union of compact sets and hence an $F_\sigma$ set. 
+    
+    For (c), let 
+    \[
+        A = \Set{\sum_{\text{odd $k<n$}}\frac{1}{k}}{n\in\N},\quad
+        B = \Set{\sum_{\text{even $k<n$}}\frac{-1}{k}}{n\in\N}.
+    \]
+    Then $A$ and $B$ are closed since they are subsequences of 
+    harmonic series or negative harmonic series. However, the 
+    alternating harmonic series does converge to $\log{2}$, 
+    which is irrational and hence not in $A+B$. Thus $A+B$ is 
+    not closed.
+\end{pf}
+
+\begin{exercise}\exelab{1.20}
+    Show that there exist closed sets $A$ and $B$ such that 
+    $m(A)=m(B)=0$ while $m(A+B)>0$ in both $\R$ and $\R^2$.
+\end{exercise}
+\begin{pf}
+    In $\R$, let $A$ be the Cantor set and $B=\frac{1}{2}A$. 
+    Then $m(A)=m(B)=0$ by \exeref{1.3} and \exeref{1.7}. 
+    However, for any $x\in [0,1]$ whose ternary expansion is 
+    $(x_1,\ldots)$, $x_k\in\set{0,1,2}$. Now simply pick 
+    $a\in A$ and $b\in B$ such that their ternary expansions 
+    satisfy that if $x_k=0$, $a_k=b_k=0$; if $x_k=1$, $a_k=0$ 
+    and $b_k=1$; if $x_k=2$, $a_k=2$ and $b_k=0$. Thus 
+    $A+B$ contains $[0,1]$ and hence $m(A+B)>0$. 
+
+    In $\R^2$, let $A=[0,1]\times\set{0}$ and $B=
+    \set{0}\times[0,1]$. Then $m(A)=m(B)=0$ but $A+B=[0,1]^2$ 
+    and hence $m(A+B)>0$.
+\end{pf}
+
+\begin{exercise}\exelab{1.21}
+    Prove that there is a continuous function that maps a 
+    Lebesgue measurable set to a non-measurable set. 
+\end{exercise}
+\begin{pf}
+    Consider the Vitali set $V$ in $[0,1]$ and the Cantor set 
+    $C$. By \exeref{1.2} we know that $\exist$ a surjective 
+    continuous function $F:C\to [0,1]$. Then $F^{-1}(V)$ is 
+    a subset of $C$ and hence measurable while $F(F^{-1}(V)) 
+    = V$ is not measurable. 
+\end{pf}
+
+\begin{exercise}\exelab{1.22}
+    Show that there is no function defined on $\R$ that is 
+    continuous everywhere in $\R$ and also satisfies that 
+    $f(x) = \chi_{[0,1]}(x)$ almost everywhere.
+\end{exercise}
+\begin{pf}
+    Suppose such function $f$ exists. Since $f(x) = 
+    \chi_{[0,1]}(x)$ almost everywhere, for any open 
+    interval $I_\delta$ containing point $0$ with length 
+    $\delta$, $f$ cannot differ from $\chi_{[0,1]}(x)$ on 
+    $I_\delta$ since any nonempty open intervals has non-zero
+    measure. Thus $f$ must take value $1$ and $0$ on 
+    $I_\delta$ for every $\delta$. This contradicts to 
+    the continuity of $f$ at $0$.
+\end{pf}
+
+\begin{exercise}\exelab{1.23}
+    Let $f(x,y)$ be a function on $\R^2$ such that for any 
+    fixed $x$, $f(x,y)$ is continuous in $y$ and vice versa. 
+    Prove that $f$ is measurable on $\R^2$. 
+\end{exercise}
+\begin{pf}
+    For any given $y$, let $f_n(x,y) = f(2^{-n}x_n,y)$ where 
+    $x_n$ is the largest integer such that $2^{-n}x_n\leq x$. 
+    We now claim that $f_n$ is measurable. Indeed, 
+    \begin{equation*}
+        \begin{split}
+            \Set{(x,y)}{f_n(x,y)>a} &= \bigcup_{k\in\Z} 
+            \Set{(x,y)}{2^{-n}k\leq x < 2^{-n}(k+1),f(2^{-n}k,y)>a}\\
+            &= \bigcup_{k\in\Z} [2^{-n}k,2^{-n}(k+1))\times\Set{y}{f(2^{-n}k,y)>a}.
+        \end{split}
+    \end{equation*}
+    Since $f(2^{-n}k,y)$ is continuous in $y$, $\Set{y}{f(2^{-n}k,y)>a}$ 
+    is open and hence the product is measurable. Thus $f_n$ is 
+    measurable. Next, we claim that $f_n\to f$ pointwisely. 
+    For any $(x,y)$ and $\epsilon>0$, $\exist N$ such that 
+    $\abs{2^{-n}x-x}<\delta$ for all $n\geq N$, where $\delta$ 
+    is small enough such that $\abs{f(x',y)-f(x,y)}<\epsilon$ 
+    when $\abs{x'-x}<\delta$. Thus 
+    $\abs{f_n(x,y)-f(x,y)}<\epsilon$ for any $n\geq N$. As 
+    $f_n$ is measurable and converges pointwisely to $f$, $f$ 
+    is also measurable.
+\end{pf}
+
+\begin{exercise}\exelab{1.24}
+    Find an enumeration $\set{r_n}$ of $\Q$ such that the 
+    complement of $\bigcup_n \pth{r_n-\frac{1}{n}, r_n+\frac{1}{n}}$ 
+    in $\R$ is nonempty.
+\end{exercise}
+\begin{pf}
+    We split the index set $\N$ into $S = \Set{2^n}{n\in\N}$ 
+    and $\N-S$. Next, we enumerate those rationals lying 
+    outside $[0,1]$ using $\Set{a_n}{n\in S}$ and those inside 
+    $[0,1]$ using $\Set{b_n}{n\in\N-S}$. Now let $r_n$ combine 
+    the two enumerations. Then observe that 
+    \[
+        m(\bigcup_{n\in S} \pth{a_n-\frac{1}{n}, a_n+\frac{1}{n}})
+        \leq \sum_{n\in S} \frac{2}{n} < \infty
+    \] 
+    and 
+    \[
+        m(\bigcup_{n\in\N-S} \pth{b_n-\frac{1}{n}, b_n+\frac{1}{n}})
+        \leq m([-1,2]) < \infty.
+    \]
+    It follows that the complement of $\bigcup_n 
+    (r_n-\frac{1}{n},r_n+\frac{1}{n})$ must have nonzero measure 
+    and hence nonempty. 
+\end{pf}
+
+\begin{exercise}\exelab{1.25}
+    Prove that $E$ is measurable if and only if for $\epsilon>0$, 
+    $\exist$ closed set $F$ such that $m^*(E-F)<\epsilon$.
+\end{exercise}
+\begin{pf}
+    Assume that $E$ is measurable, then so does $E^c$. Thus 
+    for any $\epsilon>0$, $\exist$ open set $G$ such that 
+    $m^*(G-E^c)<\epsilon$. Pick $F = G^c \subset E$, then $F$ 
+    is closed and $m^*(E-F) = m^*(G-E^c)<\epsilon$. 
+
+    Conversely, suppose that for any $\epsilon>0$, $\exist$ 
+    closed set $F\subset E$ such that $m^*(E-F)<\epsilon$. 
+    Then pick $G = F^c \supset E^c$, which is open. Then 
+    $m^*(G-E^c) = m^*(E-F)<\epsilon$. Hence $E^c$ is 
+    measurable and so does $E$. 
+\end{pf}
+
+\begin{exercise}\exelab{1.26}
+    Suppose $A\subset E\subset B$ where $A$ and $B$ are measurable 
+    and $m(A) = m(B)$. Prove that $E$ is measurable.
+\end{exercise}
+\begin{pf}
+    By measurability of $B$, $\exist$ an open set $G$ such 
+    that and $m^*(G-B)<\epsilon$. Then we have $m^*(G-A) = 
+    m(G)-m(A) < m(B)+\epsilon - m(A) =  m(A) + \epsilon - m(A) 
+    = \epsilon$, provided that $A$ is also measurable. Thus 
+    $m^*(G-E)\leq m^*(G-A) < \epsilon$, which shows that $E$ 
+    is measurable.
+\end{pf}
+
+\begin{exercise}\exelab{1.27}
+    Suppose $E_1\subset E_2$ are compact sets in $\R^d$. Prove 
+    that for any $c$ with $m(E_1)<c<m(E_2)$, $\exist$ compact 
+    set $E$ such that $m(E) = c$ and $E_1\subset E\subset E_2$.
+\end{exercise}
+\begin{pf}
+    Let $f(t) = m(E_2\bigcap D(t))$ where $D(t)=
+    \Set{x}{d(x,E)\leq t}$. Then $f(0)=m(E_1)$ and $f(x)=m(E_2)$ 
+    for some $x>0$. Furthermore, $f$ is continuous since for every 
+    $t\in\R_+\bigcup\set{0}$, $D(t-\frac{1}{n})\nearrow D(t)$ and 
+    hence $\exist N$ such that $m(D(t))-m(D(t-\frac{1}{N}))
+    <\epsilon$. Thus $f(t)-f(t-\frac{1}{N}) = m(E_2\bigcap D(t))
+    - m(E_2\bigcap D(t-\frac{1}{N})) \leq m(D(t)) - 
+    m(D(t-\frac{1}{N}))<\epsilon$. Since $f$ is continuous and 
+    $m(E_1)<c<m(E_2)$, $\exist$ $t\in [0,x]$ such that $f(t)=c$
+    by intermediate value theorem. Hence $E = E_2\bigcap D(t)$ 
+    is the desired compact set.
+\end{pf}
+
+\begin{exercise}\exelab{1.28}
+    Let $E$ be a set with $m^*(E)>0$. Prove that for each 
+    $\alpha\in (0,1)$, $\exist$ an open interval $I$ such that 
+    $m^*(E\bigcap I)\geq\alpha m^*(I)$.
+\end{exercise}
+\begin{pf}
+    Choose an open set $V$ conatining $E$ such that $m^*(E)\geq 
+    \alpha m^*(V)$. Consider $I_n$ disjoint open intervals so 
+    that their union is $V$. If all open intervals fail to satisfy 
+    the condition, then $m^*(E) = m^*(E\bigcap V) = 
+    m^*(\bigcup_n E\bigcap I_n) \leq \sum_n m^*(E\bigcap I_n) 
+    < \alpha\sum_n m^*(I_n) = \alpha m^*(V)$, leading to a 
+    contradiction. Thus $\exist$ an open interval $I$ such that 
+    $m^*(E\bigcap I)\geq\alpha m^*(I)$.
+\end{pf}
+
+\begin{exercise}[Steinhaus Theorem]\exelab{1.29}
+    Suppose $E\subset\R$ is a measurable set with $m(E)>0$. Prove 
+    that the \textbf{difference set} of $E$, $\Set{x-y}{x,y\in E}$ 
+    contains an open interval centered at origin.
+\end{exercise}
+\begin{pf}
+    By \exeref{1.28}, $\exist$ an open interval $I$ such that 
+    $m^*(E\bigcap I)\geq (9/10)m^*(I)$. Let $S = E\bigcap I$ and 
+    suppose that $S$ does not contain an open interval centered 
+    at origin. Then for a small enough $\epsilon>0$, $S$ and 
+    $S+\epsilon$ are disjoint. Thus $m^*(S\bigcup(S+\epsilon))\leq 
+    m^*(I\bigcup(I+\epsilon)) = m^*(I)+\epsilon$, but 
+    $m^*(S\bigcup(S+\epsilon)) = 2 m^*(S) \geq 2(9/10)m^*(I)$. 
+    This leads to a contradiction and hence $S$ must contain an 
+    open interval centered at origin.
+\end{pf}
+
+\begin{exercise}\exelab{1.30}
+    Let $E,F$ be measurable sets and $m(E),m(F)>0$. Prove that 
+    $E+F$ contains an interval. 
+\end{exercise}
+\begin{pf}
+    By \exeref{1.28}, given $\alpha,\beta\in (0,1)$, we can find 
+    open intervals $I_1, I_2$ such that $m(E\bigcap I_1)\geq
+    \alpha m(I_1)$ and $m(-F\bigcap I_2)\geq\beta m(I_2)$. 
+    Without loss of generality, we may assume that $m(I_1)\leq 
+    m(I_2)$. Then $\exist t$ such that $-t+I_1\subset I_2$. Next, 
+    for any $-s\in (0,(1-\alpha)m(I_1))$, $(-t-s+I_1)\bigcap I_2$ 
+    has length at least $m(I_1)+s>\alpha m(I_1)$. Now we claim 
+    that $(E-t-s)\bigcap (-F)$ is nonempty. If not, then $(E-t-s)
+    \bigcap(I_1-s-t)$ and $(-F)\bigcap I_2$ are disjoint. But 
+    this implies that $m(((E-t-s)\bigcap(I_1-s-t))\bigcup 
+    ((-F)\bigcap I_2)) = m(E\bigcap I_1)+m((-F)\bigcap I_2)
+    \geq \alpha m(I_1)+\beta m(I_2)$ and also $m(((E-t-s)\bigcap
+    (I_1-s-t))\bigcup ((-F)\bigcap I_2))\leq m((I_1-s-t)\bigcup 
+    I_2) < m(I_2)+s$, leading to a contradiction by picking 
+    $s<\alpha m(I_1)-(1-\beta)m(I_2)$ and $\alpha > 
+    (1-\beta)m(I_2)/m(I_1)$. Since the intersection is nonempty, 
+    so does $I = (E-t-s)\bigcap(I_1-t-s)\bigcap(-F)\bigcap I_2$. 
+    For any $x\in I$, $x = e-t-s = -f$ for some $e\in E$ and 
+    $f\in F$. Thus $e+f = t+s$ and $E+F$ contains an interval 
+    centered at $t$ with radius $\alpha m(I_1)-(1-\beta)m(I_2)$.
+\end{pf}
+
+\begin{exercise}\exelab{1.31}
+    Prove that the Vitali set $V$ is not measurable.
+\end{exercise}
+\begin{pf}
+    Suppose $V$ is measurable. Consider translations of $V$ 
+    by all rational numbers $\set{r_n}$ in $[0,1]$. We obtain 
+    that $\bigcup_n V+r_n$ is a countable disjoint union of 
+    measurable sets covering $[0,1]$, and hence each $V_n$ must 
+    possesses a positive measure or the measure of $\bigcup_n 
+    V+r_n$ must be zero. By \exeref{1.29}, the difference set 
+    of $V$, denoted as $S$, contains an open interval centered 
+    at origin. Note that $S$ does not contain any rational 
+    numbers except $0$ by construction and hence cannot have 
+    an interval having dense rational numbers in the open 
+    interval, posing a contradiction. It follows that $V$ is 
+    not measurable.
+\end{pf}
+
+\begin{exercise}\exelab{1.32}
+    Let $V$ be the Vitali set. 
+    \begin{thmenum}
+        \item Prove that if $E\subset V$ is measurable, then 
+        $m(E) = 0$. 
+        \item Let $G\subset\R$ with $m^*(G)>0$. Prove that there 
+        exists a subset of $G$ that is not measurable. 
+    \end{thmenum}
+\end{exercise}
+\begin{pf}
+    For (a), the proof is by contradiction. If $E$ has positive 
+    measure, then the difference set of $E$, $S$, contains 
+    an open interval centered at origin by \exeref{1.29}. But 
+    $S$ does not contain any rational numbers except $0$ since 
+    $E\subset V$. Then $S$ cannot contain an interval having 
+    dense rational numbers in the open interval, leading to a  
+    contradiction. Thus $m(E) = 0$.
+
+    To see (b), we first note that $m^*(G)>0$ implies that 
+    $G$ is uncountable since any countable set has zero outer
+    measure. This implies that $G$ we can follow the 
+    construction of the Vitali set to obtain a subset of $G$ 
+    by considering all equivalence classes of $\sim$ where 
+    $x\sim y$ if $x-y\in\Q$. This subset is again not 
+    measurable by similar arguments as in \exeref{1.31}.
+\end{pf}
+
+\begin{exercise}\exelab{1.33}
+    Let $V$ be the Vitali set. Show that $V^c = [0,1] - V$ 
+    satisfies $m^*(V^c) = 1$ and $m^*(V) + m^*(V^c)\neq 
+    m^*(V\bigcup V^c) = m^*([0,1])$ despite that $V$ and 
+    $V^c$ are disjoint.
+\end{exercise}
+\begin{pf}
+    Since $V^c\subset [0,1]$, $m^*(V^c)\leq m^*([0,1]) = 1$. 
+    Suppose $m^*(V^c)<1$, then $\exist$ sequence of open 
+    intervals $U_n$ whose union $U$ covers $V^c$ such that 
+    $m^*(U) < 1$. Since $U$ is open, $U$ is a countable union 
+    of disjoint open intervals $U'_n$ and also measurable. Then 
+    $1>1-\epsilon>m(U) = \sum_n m(U'_n)$ for some $\epsilon>0$. 
+    Then $\exist$ an open interval lying in $U^c$ and hence in 
+    $V$, contradicting to (a) in \exeref{1.32} since an open 
+    interval must have positive measure. We conclude that 
+    $m^*(V^c) = 1$.
+
+    Next, suppose that $m^*(V)+m^*(V^c)=m^*(V\bigcup V^c)=1$. 
+    Then $m^*(V)=0$ and hence $V$ is measurable, which is a 
+    contradiction to \exeref{1.31}. Thus $m^*(V) + m^*(V^c)
+    \neq m^*(V\bigcup V^c)$.
+\end{pf}
+
+\begin{exercise}\exelab{1.34}
+    Let $C_1,C_2$ be the Cantor-like sets as with constant 
+    dissection ratios $\xi_1,\xi_2$ respectively. Prove that 
+    $\exist F:[0,1]\to[0,1]$ such that $F$ is continuous, 
+    bijective, increasing, and $F(C_1) = C_2$.  
+\end{exercise}
+\begin{pf}
+    Note that we may write $C_1$ into $\bigcap_n C_1^n$ where 
+    $C_1^n$ is the $n$th stage of the Cantor set. Then we 
+    define $f$ sending any $x\in C_1$ to a sequence $a_k$ such 
+    that $a_k = 0$ if $x$ lies in the left interval in the $k$th
+    stage and $a_k=1$ otherwise. Then $f$ is a bijection from 
+    $C_1$ to $\set{0,1}^\N$. Follow a similar construction, 
+    we obtain $g$ from $\set{0,1}^\N$ to $C_2$ being another 
+    bijection. $f,g$ are also continuous (by \exeref{1.2}) and 
+    increasing under the order in $\set{0,1}^\N$ set to be the 
+    usual order of their summation $\sum_n 2^{-n}a_n$. For the 
+    rest disjoint open intervals, just map them through the 
+    piecewise linear function $h$ connecting the endpoints. 
+    Finally, 
+    \[
+        F = \begin{cases}
+            g\circ f^{-1} & \text{on } C_1\\
+            h & \text{on } [0,1]\bigcap(C_1)^c
+        \end{cases}
+    \]
+    is the desired function.
+\end{pf}
+
+\begin{exercise}\exelab{1.35}
+    Find a measurable function $f$ and a continuous function 
+    $\Phi$ such that $f\circ\Phi$ is not measurable. 
+    Furthermore, show that there exists a Lebesgue measurable 
+    set that is not a Borel set.
+\end{exercise}
+\begin{pf}
+    Let $\Phi:C_1\to C_2$ as in \exeref{1.34} with $m(C_1)>0$ 
+    and $m(C_2)=0$, $N\subset C_1$ be a non-measurable set by 
+    \exeref{1.32}. Take $f = \chi_{\Phi(N)}$. Then  
+    \[
+        (f\circ\Phi)^{-1}((0,1]) = \Phi^{-1}(\Phi(N)) = N 
+    \]
+    is not a measurable set. Thus $f\circ\Phi$ is not 
+    measurable.Also, $\Phi(N)$ is a Lebesgue measurable set 
+    since it is a subset of $C_2$ and hence has measure zero. 
+    However, it is not a Borel set since $\Phi^{-1}(\Phi(N)) 
+    = N$ is not measurable.
+\end{pf}
+
+\begin{exercise}\exelab{1.36}
+    \begin{thmenum}
+        \item Construct a measurable set $E\subset [0,1]$ such 
+        that for any nonempty open subinterval $I\subset [0,1]$, 
+        both $m(E\bigcap I)$ and $m(E^c\bigcap I)$ have positive
+        measure. 
+        \item Let $f=\chi_E$. Show that if $g(x)=f(x)$ almost 
+        everywhere, then $g$ is discontinuous everywhere.
+    \end{thmenum}
+\end{exercise}
+\begin{pf}
+    First, we claim that any nonempty open interval $I$ contains 
+    a pair of disjoint closed sets $S,T$ such that 
+    $m(S),m(T)>0$ and $S^\circ,T^\circ = \varnothing$. Indeed, 
+    For $I=(a,b)$, we can split $I$ into $(a,(a+b)/2)$ and 
+    $((a+b)/2,b)$. For each of them, we can build a fat Cantor 
+    set lying in the interval. Thus we have found $S,T$ as 
+    required.
+    
+    Now considering all open intervals in $[0,1]$ with 
+    rational center and radius. Since such intervals are 
+    countable, we can enumerate them as $\set{I_n}$. Pick 
+    a pair of disjoint closed sets with empty interiors 
+    $S_1,T_1$ in $I_1$. The choices of closed disjoint 
+    intervals are chosen inductively. Given $S_1,\ldots,S_n$ 
+    and $T_1,\ldots,T_n$, $I_{n+1}-S_1-\cdots-S_n-T_1-\cdots
+    -T_n$, since the $S_i$ and $T_i$ are closed sets with 
+    empty interiors, so does their finite union. Thus we know 
+    that there is an open interval in $I_{n+1}-S_1-\cdots-S_n
+    -T_1-\cdots-T_n$. Choose disjoint closed sets $S_{n+1},
+    T_{n+1}$ with empty interiors from the interval. Set 
+    $E = \bigcup_n S_n$. Now for any open interval $I$, $I$ 
+    must contain some $I_n$. Then $\exist S_{n+1}\subset 
+    I_n\subset I$ is a set with positive measure and hence 
+    $m(E\bigcap I)>0$. Similarly, $T_{n+1}\subset E^c\bigcap 
+    I_n$ is also a set with positive measure and hence 
+    $m(E^c\bigcap I)>0$.
+    
+    For (b), suppose that $g$ is continuous at $x$. Then for 
+    every open $V\subset\R$ containing $g(x)$, $g^{-1}(V)$ is 
+    open in $[0,1]$. Choosing an open interval $I\subset 
+    g^{-1}(V)$, $m(E\bigcap I)>0$ and $m(E^c\bigcap I)>0$. 
+    Then $f(I)=\set{0,1}$ since $f=g$ almost everywhere. This 
+    means that if we pick $x$ such that $g(x)=f(x)$, then 
+    $V$ contains only points $\set{0,1}$, which is absurd. 
+    Thus $g$ must be discontinuous everywhere.
+\end{pf}
+
+\begin{exercise}\exelab{1.37}
+    Let $\Gamma$ be the graph of a continuous function 
+    $f:\R\to\R$. Show that $\Gamma$ has measure zero in $\R^2$.
+\end{exercise}
+\begin{pf}
+    We start by considering the graph of $f$ on $[k,k+1]$, 
+    $k\in\Z$. Fixing $k\in\Z$, since $f\in C([k,k+1])$, $f$ is 
+    $L$-Lipschitz for some $L>0$. Consider sequences of
+    rectangle covers $R_n^i$ as follows. For each $n$, let 
+    \[
+        R_n^i = [k+\frac{i-1}{n}, k+\frac{i}{n}]
+        \times[f(k+\frac{i-1}{n})-\frac{L}{n}, 
+        f(k+\frac{i-1}{n})+\frac{L}{n}],
+        \quad i = 1,\ldots,n.
+    \]
+    Then $m(R_n^i) = \frac{2L}{n^2}$. For given $n$, 
+    $R_n^i$ are almost disjoint and hence $m(\bigcup_i R_n^i)
+    = \frac{2L}{n}$. Letting $n\to\infty$, we obtain that 
+    the graph of $f|_{[k,k+1]}$ has measure zero. Since 
+    $\Gamma$ is the countable union of the graphs of 
+    $f|_{[k,k+1]}$, $k\in\Z$, $\Gamma$ has measure zero.
+\end{pf}
+
+\begin{exercise}\exelab{1.38}
+    Let $a,b\geq 0$. Prove that $(a+b)^\gamma\geq 
+    a^\gamma+b^\gamma$ if $\gamma\geq 1$ and $(a+b)^\gamma\leq 
+    a^\gamma+b^\gamma$ if $0\leq\gamma\leq 1$. 
+    ($a,b> 0$ as $\gamma=0$)
+\end{exercise}
+\begin{pf}
+    Let $\gamma\geq 0$. Notice that $(a+t)^{\gamma-1}-
+    t^{\gamma-1}\geq 0$. Then 
+    \[
+        0 \leq\int_{0}^{b}(a+t)^{\gamma-1}-t^{\gamma-1}\d{t} 
+        = \frac{1}{\gamma}\pth{(a+t)^\gamma-t^\gamma}\at_0^b
+        = \frac{1}{\gamma}((a+b)^\gamma-b^\gamma-a^\gamma).
+    \]
+    Rearranging the terms yields the desired result. The case 
+    for reverse inequality is similar.
+\end{pf}
+
+\begin{exercise}[A-G inequality]\exelab{1.39}
+    Prove that $\frac{1}{n}\sum_{i=1}^{n}x_i\geq 
+    \pth{\prod_{i=1}^{n}x_i}^{1/n}$ for all $x_i\geq 0, 
+    i=1,\ldots,n$.
+\end{exercise}
+\begin{pf}
+    Since $\log$ is a concave function, by Jensen's inequality, 
+    \[
+        \log\pth{\frac{1}{n}\sum_{i=1}^{n}x_i} 
+        \geq \frac{1}{n}\sum_{i=1}^{n}\log x_i
+        = \frac{1}{n}\log\pth{\prod_{i=1}^{n}x_i}.
+    \]
+    Taking exponential on both sides establishes the result. 
+    Note that the above proof is valid for all $x_i>0$; 
+    however, the case where some of $x_i=0$ is trivial 
+    since the right hand side of the inequality is $0$.
+\end{pf}

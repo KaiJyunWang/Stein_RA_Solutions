@@ -1,0 +1,225 @@
+The following are some auxiliary results used in the proofs 
+of the exercises. Most of them are standard results in 
+analysis while have not been encountered in my previous 
+studies. In order to enhance the completeness of the 
+solutions, I have included them in this appendix.
+\begin{theorem}[Baire Category Theorem]\thmlab{A.1}
+    Let $X$ be a complete metric space. Then the 
+    intersection of countably many dense open sets in $X$ 
+    is dense in $X$.
+\end{theorem}
+\begin{pf}
+    Let $G_n$ be dense open sets in $X$. We first claim 
+    that $\not\exist$ perfect $F$ such that $G_n^c$ is 
+    dense in $F$. Suppose not, then we can pick $x\in 
+    G_n\bigcap F$ such that $\forany B_\epsilon(x)$, 
+    $B_\epsilon(x)\bigcap G_n^c\neq\varnothing$ since 
+    $G_n^c$ is dense in $F$. But $B_\epsilon(x)\subset
+    G_n$ for some $\epsilon$, posing a contradiction.
+
+    Now pick some perfect $E$. Since $G_n^c$ is not dense 
+    in $E$, $\exist x_1\in G_1\bigcap E$. Then $\exist
+    \epsilon_1>0$ such that 
+    $\overline{B_{\epsilon_1}(x_1)}\subset G_1$ and 
+    $\overline{B_{\epsilon_1}(x_1)}$ is perfect. Since 
+    $G_2^c$ is not dense in $E$, $\exist x_2\in G_2\bigcap
+    \overline{B_{\epsilon_1}(x_1)}$. Then $\exist
+    \epsilon_2 = \min\brc{\epsilon_1/2,\delta_2}$, where 
+    $\delta_2$ is a small number such that 
+    $\overline{B_{\delta_2}}\subset G_2$. The procedure 
+    continues and we obtain a sequence that 
+    $\overline{B_{\epsilon_1}(x_1)}\supset
+    \overline{B_{\epsilon_2}(x_2)}\supset\cdots$, which 
+    are closed, bounded and nonempty with 
+    $\lim_{n}\diam{\overline{B_{\epsilon_n}(x_n)}}
+    \leq \lim_{n} 2\epsilon_1 2^{-n+1} = 0$. 
+
+    We now make the second claim: For any sequence of 
+    closed and bounded sets in $X$ with 
+    $E_n\supset E_{n+1}$ and $\lim_{n}\diam{E_n}=0$, 
+    $\bigcap_n E_n$ consists of exactly one point. To see 
+    this, suppose $x\neq y$ are distinct points in 
+    $\bigcap_n E_n = \lim_{n}E_n$. Since $x$ and $y$ are 
+    distinct, $d(x,y)>0$ and $\diam{E_n} = 
+    \sup_{x',y'\in E_n} d(x',y')\geq d(x,y)$. Let 
+    $n\to\infty$, then $\lim_{n}\diam{E_n}\geq d(x,y)>0$, 
+    which is a contradiction.
+
+    By the second claim, $\bigcap_n G_n\supset
+    \bigcap_n\overline{B_{\epsilon_n}(x_n)}
+    \neq\varnothing$. Futhermore, the choice of $x_1$ is 
+    dense in $X$. This furnishes the proof.
+\end{pf}
+
+\begin{definition*}
+    A topological space $(X,\mathcal{T})$ is said to be 
+    \textbf{normal} if for every pair of disjoint closed 
+    sets $C$ and $D$ in $X$, there exist disjoint open sets 
+    $U$ and $V$ such that $C\subset U$ and $D\subset V$.
+\end{definition*}
+
+\begin{lemma}[Urysohn's Lemma]\lemlab{A.2}
+    A topological space $(X,\mathcal{T})$ is normal if 
+    and only if for every pair of nonempty disjoint closed 
+    sets $C$ and $D$ in $X$, there is a continuous function 
+    $f:X\to[0,1]$ such that $f(C)=\set{0}$ and 
+    $f(D)=\set{1}$.
+\end{lemma}
+\begin{pf}
+    We shall first prove the necessity. Let $C$, $D$ be 
+    disjoint closed sets in $X$ and $f$ be the function as 
+    in the statement of the lemma. Then $C\subset 
+    f^{-1}([0,1/2))$ and $D\subset f^{-1}((1/2,1])$. Since 
+    $f$ is continuous, the preimages are open. This proves
+    the necessity.
+
+    The sufficiency is more complicated. We shall first 
+    construct a collection of open sets $\Set{U_q}{q\in Q}$ 
+    satisfying that for any $p<q$, $\overline{U_p}\subset
+    U_q$, where $Q = \Q\bigcap[0,1]$. 
+
+    To begin, let $U_1 = X-D$ and by the normality of $X$, 
+    pick an open $U_0$ such that $C\subset U_0\subset 
+    \overline{U_0}\subset U_1$. Note that the desired property 
+    holds. Now suppose that $U_p$ has been constructed for 
+    $p\in\set{p_1,\ldots,p_n} = P_n$, we are now to construct 
+    $U_{p_n+1}$ for $p_{n+1}$. Since $P_n$ is finite, we may 
+    find $q,r\in Q$ such that $p_{n+1}$ is the only numbers in 
+    $P_n$ that $q<p_{n+1}<r$. By the inductive hypothesis, we 
+    have $\overline{U_q}\subset U_r$. Again, by the normality, 
+    we may choose an open $U_{p_{n+1}}$ such that 
+    $\overline{U_q}\subset U_{p_{n+1}}\subset 
+    \overline{U_{p_{n+1}}}\subset U_r$. With this, the 
+    collection of open sets still preserves the desired 
+    property that $p<q$ implies $\overline{U_p}\subset U_q$. 
+    As the process proceeds, we obtain a collection of open 
+    sets $\Set{U_q}{q\in Q}$ preserving the desired property. 
+
+    Next, we extend the index set of our collection to $\Q$ 
+    by defining $U_q = \varnothing$ if $q<0$ in $\Q$ and 
+    $U_q = X$ if $q>1$. With the extension, we still have the 
+    desired property that $p<q$ implies $\overline{U_p}\subset
+    U_q$ for $\Set{U_q}{q\in\Q}$.
+
+    For each $x\in X$, we define $\Q(x) = 
+    \Set{q\in\Q}{x\in U_q}$. Observe that $\Q(x)$ is nonempty 
+    since $x\in U_q=X$ for any $q>1$ and also $\Q(x)$ is 
+    bounded below by $0$ since if $q<0$, then $x\not\in U_q 
+    = \varnothing$. Remark that for each $x\in X$, $\Q(x)$ 
+    contains every rational numbers greater than $1$ and some 
+    lies between $0$ and $1$.
+
+    By the axiom of completeness, we can define the function 
+    $f:X\to[0,1]$ such that $f(x) = \inf\Q(x)$. Such function 
+    is well-defined since $\Q(x)$ is bounded below by $0$ and 
+    above by $1$. It remains to show that $f$ is continuous 
+    and seperates $C$ and $D$.
+
+    The first claim is that $f(C)=\set{0}$ and $f(D)=\set{1}$.
+    Indeed, if $x\in C$, then $x\in U_0\subset U_p$ for all 
+    $p>0$. Thus, $\inf\Q(x)\leq 0$. This gives $f(x)=0$. If 
+    $x\in D$, then $x\not\in U_1$ and hence $\inf\Q(x)\geq 1$. 
+    Then $f(x)=1$. Hence we conclude that $f(C)=\set{0}$ and 
+    $f(D) = \set{1}$. The claim further implies that $f$ 
+    separates $C$ and $D$. 
+
+    Before claiming the continuity of $f$, we shall observe 
+    that for any $x\in\overline{U_q}$, $f(x)\leq q$ by the 
+    construction that $\overline{U_q}\subset U_r$ for any 
+    $r>0$. Also, for any $x\not\in U_q$, $f(x)\geq q$ since 
+    $x\not\in U_p$ for any $p<q$. With these observations, 
+    we are now ready to show the continuity of $f$. 
+
+    For any open interval $U = (a,b)$ that lies in $[0,1]$, 
+    we need to show that $f^{-1}(U)$ is open in $X$. Fixing 
+    any $x\in f^{-1}(U)$, we can find rational numbers $p,q$ 
+    such that $a<p<f(x)<q<b$. $p<f(x)$ implies that $x\not\in
+    \overline{U_p}$; otherwise, $f(x)\geq p$, forming a 
+    contradiction. By similar argument, $x\in U_q$. As a 
+    result, $x\in U_q-\overline{U_p}$. Let the open set be 
+    $V = U_q-\overline{U_p}$. 
+
+    To show that $f(V)\subset U$, let $y\in V$. Then $y\in 
+    U_q\subset\overline{U_q}$ and $f(y)\leq q<b$. Also, $y\not
+    \in\overline{U_p}\supset U_p$ and hence $f(y)\geq p>a$. 
+    Thus $f(y)\in[p,q]\subset U$. Therefore $f$ is indeed 
+    continuous. The proof is now complete.
+\end{pf}
+
+\begin{definition}
+    A topological space $X$ is said to be a 
+    \textbf{Hausdorff space} if for any pair of distinct
+    points $x$ and $y$ in $X$, there exist disjoint open 
+    sets $U$ and $V$ such that $x\in U$ and $y\in V$. 
+\end{definition}
+
+\begin{lemma}\lemlab{A.3}
+    Let $A$ and $Y$ be closed subspaces of a normal Hausdorff 
+    space $X$ and let $U$ be an open neighbourhood of $Y$ in 
+    $X$. Assume that $C\subset A$ is a closed neighbourhood 
+    in $A$ of $Y-A$, contained in $U-A$. Then there exists a 
+    closed neighbourhood $Z$ of $Y$, contained in $U$, such 
+    that $Z-A$ equals $C$.\footnote{The proof of this lemma 
+    and the Tietze Extension Theorem are taken from 
+    \url{https://link.springer.com/content/pdf/10.1007/s000
+    130050272.pdf}.}
+\end{lemma}
+\begin{pf}
+    The case $A = \varnothing$ is elementary and well known; 
+    applying it to the situation at hand we obtain first a 
+    closed neighbourhood $Z'''$ of $Y$ contained in $U$. It 
+    will suffice to construct (from $Z'''$) a closed 
+    neighbourhood $Z'$ of $Y$ contained in $U$ such that
+    $Z'\bigcap A$ is contained in $C$, since then $Z\coloneqq 
+    Z'\bigcup C$ will have all the properties stated.
+
+    Let $D$ be the closure of $A-C$. Since $C$ is assumed to 
+    be a neighbourhood of $Y\bigcap A$ in $A$, the closed sets 
+    $Y$ and $D$ are disjoint. Hence $Y$ has a closed 
+    neighbourhood $Z''$ disjoint from $D$. This implies 
+    $Z''\bigcap A\subset C$, and $Z'\coloneqq Z''\bigcap Z'''$ 
+    is a closed neighbourhood of $Y$ as required.
+\end{pf}
+
+\begin{theorem}[Tietze Extension Theorem]\thmlab{A.4}
+    Let $X$ be a normal Hausdorff space and $A$ be a 
+    closed subset of $X$. If $f:A\to\R$ is a continuous 
+    function, then $f$ can be extended to a continuous 
+    function $F:X\to\R$. That is, $F|_A = f$. 
+\end{theorem}
+\begin{pf}
+    For $r\in[0,1]$, let $A(r) = \set{x\in A\mid f(x)\leq r}$. 
+    Put $B = \Set{r\in[0, 1]}{2^nr\text{ is integral for some }n}$.
+    For $r \in B$ we construct, by induction on the exponent of 
+    $2$ in the denominator of $r$, closed subsets $X(r)\subset X$ 
+    such that the following two conditions hold:
+    \begin{thmenum}
+        \item $X(r) \cap A = A(r)$,
+        \item $X(s)$ is a neighbourhood of $X(r)$ if $r < s$.
+    \end{thmenum}
+    We may take $X(0)=A(0) $ and $X(1)=X$. Assume that $X(r)$ 
+    with the properties above have been constructed for all 
+    $r\in(0,1)$ such that $2^nr$ is an integral. Since 
+    $X(2^{-n}(i+1))$ is a neighborhood of $ X(2^{-n}i)$, 
+    there is, by the above lemma, a closed neighborhood 
+    $X(2^{-n-1}(2i+1))$ of $ X(2^{-n}i) $ within the interior 
+    of $X(2^{-n}(i+1))$, having the prescribed intersection 
+    $X(2^{-n-1}(2i+1)) \cap A = A(2^{-n-1}2i + 1)$.
+
+    The rest of the proof follows the classical Urysohn argument
+    that we presented in \lemref{A.2}:
+    \[
+        g(x) := \inf \Set{r\in B}{x\in X(r)}
+    \]
+    defines a continuous function on $X$, extending $f$. 
+    Continuity follows simply from the fact that, for 
+    $r,s\in B$ with $r<s$, this function has values greater 
+    than $r$ and less than $s$ on the open set 
+    $X^\circ(s)-X(r)$. 
+
+    Finally, we may decompose $f$ into $g: X\to (0,1)$ and a 
+    homeomorphism $h: (0,1)\to\R$. Our previous result shows 
+    that $\exist$ continuous extension $G:X\to[0,1]$. Since 
+    $G^{-1}(\set{0,1})$ is closed and disjoint from $A$, by 
+    \lemref{A.2}, the proof is finished.
+\end{pf}

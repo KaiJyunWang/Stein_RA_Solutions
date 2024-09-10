@@ -1,0 +1,76 @@
+\begin{exercise}\exelab{2.1}
+    Given a collection of sets $F_1,F_2,\ldots,F_n$, construct 
+    $F_1^*,F_2^*,\ldots,F_N^*$ with $N=2^n-1$ such 
+    that $\bigcup_{i=1}^{N}F_i^* = \bigcup_{i=k}^{n}F_k$; 
+    $F_i^*$ are disjoint; and $F_k = 
+    \bigcup_{F_i^*\subset F_k}F_i^*$ for every $k$.
+\end{exercise}
+\begin{pf}
+    Let $I$ be a combinatorics of $\set{1,\ldots,n}$. For 
+    example, $I=\set{1,3,4}$ is a combinatorics. Note that 
+    although the length of $I$ is undetermined, the length 
+    of $I$ cannot be $0$. Now let $\set{F_i^*}$ be the 
+    collection of intersections of $F_i$ for $i\in I$ and 
+    $F_j^c$ for $j\not\in I$, for every given $I$. Then it 
+    is clear that $F_i^*$ are disjoint, and $F_k = 
+    \bigcup_{F_i^*\subset F_k}F_i^*$ since for every $x$ in 
+    $F_k$, $x$ must be in some $F_i$ for $i\in I$, where $I$ 
+    is over every possible combinatorics containing the one 
+    induces $F_k$. 
+\end{pf}
+
+\begin{exercise}\exelab{2.2}
+    Prove that if $f$ is integrable on $\R^d$ and $\delta>0$, 
+    then $f(\delta x)\to f(x)$ in $L^1$ as $\delta\to 1$.
+\end{exercise}
+\begin{pf}
+    Given $\epsilon>0$, by theorem 2.4, we know that there exists 
+    continuous functions $g\in L^1$ with compact support such that 
+    $\norm{f-g}<\epsilon/3$. Then $\norm{f(\delta x)-g(\delta x)}<\epsilon/3$ 
+    as well. Now since $g$ is continuous on compact support, we may assume that 
+    $g$ is bounded by $M$ and $\supp{g}\subset I$ where $I$ has finite positive 
+    measure $S$. Then there exists $\delta$ such that $\abs{g(x)-g(\delta x)}
+    <\epsilon/3MS$ for some $\delta$ sufficiently close to $1$. Hence 
+    \begin{equation*}
+        \norm{g(x)-g(\delta x)} = \int_{\R^d} \abs{g(x)-g(\delta x)} < \epsilon/3.
+    \end{equation*}
+    Then $\norm{f(x)-f(\delta x)} \leq \norm{f(x)-g(x)} + \norm{g(x)-g(\delta x)} 
+    + \norm{f(\delta x)-g(\delta x)} < \epsilon$. This completes the proof.
+\end{pf}
+
+\begin{exercise}\exelab{2.3}
+    Suppose $f$ is integrable on $(\pi,\pi]$ and extended to $\R$ periodically. 
+    Show that 
+    \begin{equation*}
+        \int_{-\pi}^{\pi} f = \int_I f
+    \end{equation*}
+    for any interval $I$ of length $2\pi$.
+\end{exercise}
+\begin{pf}
+    We may consider the case where $I$ is contained in two consecutive 
+    intervals $I_1,I_2$ where $I_1 = (k\pi,(k+2)\pi]$ and $I_2 = 
+    ((k+2)\pi,(k+4)\pi]$ for some $k\in\Z$. Then 
+    \begin{equation*}
+        \int_I f = \int_{I\cap I_1} f + \int_{I\cap I_2} f 
+        = \int_{-(k+1)\pi + I\cap I_1} f + \int_{-(k+1)\pi + I\cap I_2} f
+        = \int_{-\pi}^{\pi} f.
+    \end{equation*}
+    The second equality follows from the fact that the measure is invariance 
+    under translation and the fact that $f$ is periodic. The third equality 
+    follows from the fact that $I_1,I_2$ are disjoint and thus the length of 
+    the two intervals must sum up to $2\pi$. 
+\end{pf}
+
+\begin{exercise}\exelab{2.4}
+    Suppose $f$ is integrable on $[0,b]$ and 
+    \begin{equation*}
+        g(x) = \int_{x}^{b} \frac{f(t)}{t}dt
+    \end{equation*}
+    for $0<x\leq b$. Show that $g$ is integrable on $[0,b]$ and 
+    \begin{equation*}
+        \int_{0}^{b} g(x)dx = \int_{0}^{b} f(t)dt.
+    \end{equation*}
+\end{exercise}
+\begin{pf}
+    
+\end{pf}
