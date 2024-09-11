@@ -72,5 +72,114 @@
     \end{equation*}
 \end{exercise}
 \begin{pf}
-    
+    Note that 
+    \begin{equation*}
+        \abs{g(x)} = \abs{\int_{x}^{b} \frac{f(t)}{t}dt} 
+        \leq \int_{x}^{b} \abs{\frac{f(t)}{t}}dt.
+    \end{equation*}
+    Also, by Tonelli's theorem,
+    \begin{equation*}
+        \int_{0}^{b} \abs{g(x)}dx \leq \int_{0}^{b} \int_{x}^{b} \abs{\frac{f(t)}{t}}dtdx 
+        = \int_{0}^{b} \int_{0}^{t} \abs{\frac{f(t)}{t}}dxdt = \int_{0}^{b} \abs{f(t)}dt 
+        < \infty.
+    \end{equation*}
+    Hence $g$ is integrable on $[0,b]$. Now we apply Fubini's theorem to obtain 
+    \begin{equation*}
+        \int_{0}^{b} g(x)dx = \int_{0}^{b} \int_{x}^{b} \frac{f(t)}{t}dtdx 
+        = \int_{0}^{b} \int_{0}^{t} \frac{f(t)}{t}dxdt = \int_{0}^{b} f(t)dt.
+    \end{equation*}
+\end{pf}
+
+\begin{exercise}\exelab{2.5}
+    Suppose $F$ is closed in $\R$ such that $m(F^c)<\infty$. Let $\delta(x) 
+    = d(x, F)$. Consider 
+    \begin{equation*}
+        I(x) = \int_{\R} \frac{\delta(y)}{\abs{x-y}^2}dy.
+    \end{equation*}
+    \begin{thmenum}
+        \item Prove that $\delta$ is Lipschitz and hence continuous.
+        \item Show that $I(x)=\infty$ for each $x\in F^c$.
+        \item Show that $I(x)<\infty$ almost everywhere in $F$.
+    \end{thmenum}
+\end{exercise}
+\begin{pf}
+    To see (a), note that for all $\epsilon>0$, there exists $z\in F$ such that 
+    $\abs{x-z}\leq \delta(x)+\epsilon$, and hence 
+    \begin{equation*}
+        \delta(y) \leq \abs{y-z} \leq \abs{x-y} + \abs{x-z} \leq \abs{x-y} + \delta(x) + \epsilon.
+    \end{equation*}
+    Then 
+    \begin{equation*}
+        \delta(y)-\delta(x) \leq \abs{x-y} + \epsilon.
+    \end{equation*}
+    Since $\epsilon$ is arbitrary, we have $\delta(y)-\delta(x)\leq \abs{x-y}$. 
+    Similarly, we have $\delta(x)-\delta(y)\leq \abs{x-y}$, and thus 
+    $\abs{\delta(x)-\delta(y)}\leq \abs{x-y}$. This shows that $\delta$ is 
+    Lipschitz with constant $1$ and hence continuous.
+
+    For (b), let $x\in F^c$. By definition we have $\delta(y)=0$ for all 
+    $y\in F$. Then 
+    \begin{equation*}
+        I(x) = \int_{\R} \frac{\delta(y)}{\abs{x-y}^2}dy 
+        = \int_{F} \frac{\delta(y)}{\abs{x-y}^2}dy + \int_{F^c} \frac{\delta(y)}{\abs{x-y}^2}dy
+        = \int_{F^c} \frac{\delta(y)}{\abs{x-y}^2}dy.
+    \end{equation*}
+    Next, notice that $F^c$ is open and hence we may find $B_r(x)\subset F^c$. 
+    By shrinking $B_r(x)$ if necessary, we may assume that $\delta(y)>\alpha$ for 
+    some positive $\alpha$ for all $y\in B_r(x)$. Then 
+    \begin{equation*}
+        I(x) = \int_{F^c} \frac{\delta(y)}{\abs{x-y}^2}dy 
+        \geq \int_{B_r(x)} \frac{\alpha}{\abs{x-y}^2}dy 
+        = \int_{0}^{r} \frac{\alpha}{y^2}dy = \infty.
+    \end{equation*}
+    Hence $I(x)=\infty$ for each $x\in F^c$.
+
+    Finally, for (c), we first check that $\frac{\delta(y)}{\abs{x-y}^2}\chi_{F\times F^c}$ 
+    is measurable. Indeed, it is measurable since $F, F^c$ are Borel sets and 
+    thus $\chi_{F\times F^c}$ is measurable. By Tonelli's theorem, we have
+    \begin{equation*}
+        \begin{split}
+            \int_{F} I(x)dx &= \int_{F} \int_{\R} \frac{\delta(y)}{\abs{x-y}^2}dydx \\
+            &= \int_{\R} \int_{F} \frac{\delta(y)}{\abs{x-y}^2}dxdy \\
+            &= \int_{F} \int_{F} \frac{\delta(y)}{\abs{x-y}^2}dxdy + \int_{F^c} \int_{F} \frac{\delta(y)}{\abs{x-y}^2}dxdy \\ 
+            &= \int_{F^c} \int_{F} \frac{\delta(y)}{\abs{x-y}^2}dxdy,
+        \end{split}
+    \end{equation*}
+    since $\delta(y)=0$ whenever $y\in F$. Now notice that $F\subset \Set{x\in\R}{\abs{x-y}\geq \delta(y)}$. 
+    Then 
+    \begin{equation*}
+        \int_{F} \frac{1}{\abs{x-y}^2}dx \leq 2\int_{\delta(y)}^{\infty} \frac{1}{x^2}dx = \frac{2}{\delta(y)}.
+    \end{equation*}
+    Therefore, 
+    \begin{equation*}
+        \int_{F} I(x)dx = \int_{F^c} \int_{F} \frac{\delta(y)}{\abs{x-y}^2}dxdy 
+        \leq \int_{F^c} \frac{2\delta(y)}{\delta(y)}dy 
+        = 2m(F^c) < \infty.
+    \end{equation*}
+    Hence $I(x)<\infty$ almost everywhere in $F$.
+\end{pf} 
+
+\begin{exercise}\exelab{2.6}
+    \begin{thmenum}
+        \item Find a continuous $f:\R\to\R_+$ such that $f$ is integrable on 
+        $\R$ while $\displaystyle\limsup_{x\to\infty}f(x)=\infty$. 
+        \item Show that if $f$ is uniformly continuous on $\R$ and integrable, 
+        then $\displaystyle\lim_{\abs{x}\to\infty}f(x)=0$.
+    \end{thmenum}
+\end{exercise}
+\begin{pf}
+    For (a), consider 
+    \begin{equation*}
+        f(x) = \begin{cases}
+            n-n^4(n-x) & \text{if $x\in (n-1/n^3,n]$ for some $n\in\N$, $n\geq 2$}, \\
+            n-n^4(x-n) & \text{if $x\in (n,n+1/n^3)$ for some $n\in\N$, $n\geq 2$}, \\
+            0 & \text{otherwise}.
+        \end{cases}
+    \end{equation*}
+    Then $f$ is continuous and integrable on $\R$ since 
+    \begin{equation*}
+        \int_{\R} f = \sum_{n=2}^{\infty} n\cdot \frac{1}{n^3} = \pi^2/6 - 1.
+    \end{equation*}
+    However, $\displaystyle\limsup_{x\to\infty}f(x)=\infty$ since $f(n)=n$ for 
+    every $n\in\N$. 
 \end{pf}
