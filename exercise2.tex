@@ -182,4 +182,75 @@
     \end{equation*}
     However, $\displaystyle\limsup_{x\to\infty}f(x)=\infty$ since $f(n)=n$ for 
     every $n\in\N$. 
+
+    For (b), we may check the case whether $f(x)\to 0$ as $x\to\infty$ and the case 
+    $x\to -\infty$ is similar. Suppose $\displaystyle\lim_{x\to\infty}f(x)\neq 0$. Then 
+    there exists a sequence $x_n\to\infty$ such that $f(x_n)>2\epsilon>0$ and 
+    $\abs{x_{n+1}-x_n}\geq r>0$ for some $\epsilon$ and $r$. For each $x_n$, by uniform 
+    continuity, there exists $\delta_n>0$ which does not depend on $x_n$ such that 
+    $\abs{f(x)-f(x_n)}<\epsilon$ for all $x\in I_n\coloneqq (x_n-\delta, x_n+\delta)$. 
+    Then $f(x)\geq \epsilon$ if $x\in I_n$ for some $n\in\N$. Note lastly that by 
+    further shrinking $\delta<r/2$ if necessary, we may assume that $I_n$ are disjoint. 
+    Then 
+    \begin{equation*}
+        \int_{\R} f \geq \int_{\bigcup_{n\in\N} I_n} f = \sum_{n=1}^{\infty} \int_{I_n} f 
+        \geq \sum_{n=1}^{\infty} \epsilon\cdot 2\delta = \infty.
+    \end{equation*}
+    This contradicts the fact that $f$ is integrable on $\R$. Hence $\displaystyle
+    \lim_{x\to\infty}f(x)=0$. By similar argument, we have $\displaystyle
+    \lim_{x\to-\infty}f(x)=0$. This completes the proof.
+\end{pf}
+
+\begin{exercise}\exelab{2.7}
+    Suppose $f:\R^d\to\R$ is measurable on $\R^d$. Let $\Gamma = \Set{(x,y)\in\R^d\times\R}
+    {y=f(x)}$ be the graph of $f$. Show that $\Gamma$ is measurable in $\R^{d+1}$ and $m(\Gamma)=0$. 
+\end{exercise}
+\begin{pf}
+    Note that it suffices to show that $\Gamma\cap (B\times [n,n+1])$ is measure zero for all 
+    $n\in\Z$ and $B\subset\R^d$ is a box since $\Gamma$ is a countable union of such sets. 
+    Then we know that by Lusin's theorem, for any $\epsilon>0$, there exists a closed 
+    set $F_\epsilon\subset B$ such that $m(B-F_\epsilon)\leq\epsilon$ and $f$ is continuous 
+    on $F_\epsilon$. Then by similar arguments in \exeref{1.37}, we can conclude that 
+    $\Gamma\cap (F_\epsilon\times[n,n+1])$ is measure zero. On the other hand, 
+    $(B-F_\epsilon)\times[n,n+1]$ has measure at most $\epsilon$. Combining these two facts, 
+    we conclude that $m(\Gamma\cap (B\times [n,n+1]))\leq\epsilon$. Since $\epsilon$ 
+    is arbitrary, we have $m(\Gamma\cap (B\times [n,n+1]))=0$. This completes the 
+    proof.
+\end{pf}
+
+\begin{exercise}\exelab{2.8}
+    If $f$ is integrable on $\R$, show that $F(x) = \int_{-\infty}^{x} f(t)dt$ is uniformly 
+    continuous. 
+\end{exercise}
+\begin{pf}
+    Let $\epsilon>0$ be given. Since the set of continuous functions with compact support 
+    is dense in $L^1$, there exists a continuous function $g$ with compact support such that 
+    $\norm{f-g}<\epsilon/2$. Also, since $g$ is continuous on compact support, we may assume 
+    that $g$ is bounded by $M$ on $\R$. Then if $\abs{x-y}<\delta = \frac{\epsilon}{2M}$, say 
+    $x\leq y$, we have
+    \begin{equation*}
+        \begin{split}
+            \abs{F(x)-F(y)} 
+            &= \abs{\int_{-\infty}^{x} f(t)dt - \int_{-\infty}^{y} f(t)dt} \\
+            &\leq \int_{y}^{x} \abs{f(t)}dt \\
+            &\leq \int_{y}^{x} \abs{f(t)-g(t)}dt + \int_{y}^{x} \abs{g(t)}dt \\
+            &\leq \epsilon/2 + \int_{y}^{x} Mdt \\ 
+            &= \epsilon/2 + M\abs{x-y} < \epsilon.
+        \end{split}
+    \end{equation*}
+    Hence $F$ is uniformly continuous.
+\end{pf}
+
+\begin{exercise}[Tchebyshev's inequality]\exelab{2.9}
+    Suppose $f$ is integrable on $\R$ and $f\geq 0$. If $\alpha>0$ and 
+    $E_\alpha = f^{-1}(\set{(\alpha,\infty]})$, show that
+    \begin{equation*}
+        m(E_\alpha) \leq \frac{1}{\alpha}\int_{\R} f.
+    \end{equation*}
+\end{exercise}
+\begin{pf}
+    \begin{equation*}
+        \int_{\R} f \geq \int_{E_\alpha} f \geq \int_{E_\alpha} \alpha = \alpha m(E_\alpha).
+    \end{equation*}
+    Rearranging the inequality gives the desired result.
 \end{pf}
