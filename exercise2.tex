@@ -254,3 +254,32 @@
     \end{equation*}
     Rearranging the inequality gives the desired result.
 \end{pf}
+
+\begin{exercise}\exelab{2.10}
+    Suppose $f\geq 0$, and let $E_{2^k} = \Set{x}{f(x)>2^k}$ and 
+    $F_k = \Set{x}{2^k<f(x)\leq 2^{k+1}}$. If $f$ is finite almost everywhere, then 
+    \begin{equation*}
+        \bigcup_{k\in\Z} F_k = \Set{x}{f(x)>0},
+    \end{equation*}
+    where the $F_k$ are disjoint. Prove that $f$ is integrable if and only if 
+    \begin{equation*}
+        \sum_{k\in\Z} 2^k m(F_k) < \infty,\qquad\text{ if and only if }\qquad
+        \sum_{k\in\Z} 2^k m(E_{2^k}) < \infty.
+    \end{equation*}
+    Use this result to verify the following: Let 
+    \begin{equation*}
+        f(x) = \begin{cases}
+            \abs{x}^{-a} & \text{ if $\abs{x}\leq 1$,} \\
+            0 & \text{ otherwise,} 
+        \end{cases}\qquad\text{ and }\qquad
+        g(x) = \begin{cases}
+            \abs{x}^{-b} & \text{ if $\abs{x}>1$,} \\
+            0 & \text{ otherwise.}
+        \end{cases}
+    \end{equation*}
+    Then $f$ is integrable on $\R^d$ if and only if $a<d$; also $g$ is integrable on 
+    $\R^d$ if and only if $b>d$.
+\end{exercise}
+\begin{pf}
+    
+\end{pf}
