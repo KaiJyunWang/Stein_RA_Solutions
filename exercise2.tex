@@ -281,5 +281,38 @@
     $\R^d$ if and only if $b>d$.
 \end{exercise}
 \begin{pf}
+    We first show that $f$ is integrable if and only if $\sum_{k\in\Z} 2^k m(F_k)<\infty$. 
+    Let 
+    \begin{equation*}
+        s_n = \sum_{\abs{k}\leq n} 2^k \chi_{F_k}
+    \end{equation*}
+    be a sequence of simple functions. Notice the inequality 
+    \begin{equation*}
+        s_n \leq f \leq 2s_n.
+    \end{equation*}
+    Taking the integral yields
+    \begin{equation*}
+        \int s_n \leq \int f \leq 2\int s_n.
+    \end{equation*}
+    Letting $n\to\infty$, 
+    \begin{equation*}
+        \sum_{k\in\Z} 2^k m(F_k) \leq \int f \leq 2\sum_{k\in\Z} 2^k m(F_k).
+    \end{equation*}
+    Hence $f$ is integrable if and only if $\sum_{k\in\Z} 2^k m(F_k)<\infty$. 
+    Next, suppose $\sum_{k\in\Z} 2^k m(E_{2^k}) < \infty$.
+    Since $F_k = E_{2^k}-E_{2^{k+1}}$, $m(F_k) = m(E_{2^k}) - m(2^{k+1})$. 
+    Then 
+    \begin{equation*}
+        \sum_{k\in\Z} 2^k m(F_k) = \sum_{k\in\Z} 2^k \sbrc{m(E_{2^k}) - m(E_{2^{k+1}})} 
+        \leq \sum_{k\in\Z} 2^k m(E_{2^k}) < \infty.
+    \end{equation*}
+    since $E_{2^k}\supset E_{2^{k+1}}$. 
+    Lastly, if $\sum_{k\in\Z} 2^k m(F_k)<\infty$, then 
+    \begin{equation*}
+        \sum_{k=-\infty}^{\infty} 2^k m(E_{2^k}) 
+        = \sum_{k=-\infty}^{\infty}\sum_{i=k}^{\infty} 2^k m(F_i) 
+        = \sum_{i=-\infty}^{\infty} m(F_i) \sum_{k=-\infty}^{i} 2^k
+        = \sum_{i=-\infty}^{\infty} m(F_i) 2^{i+1} < \infty.
+    \end{equation*}
     
 \end{pf}
