@@ -314,5 +314,22 @@
         = \sum_{i=-\infty}^{\infty} m(F_i) \sum_{k=-\infty}^{i} 2^k
         = \sum_{i=-\infty}^{\infty} m(F_i) 2^{i+1} < \infty.
     \end{equation*}
-    
+    Now let $v_d$ denote the volume of the unit ball in $\R^d$. 
+    Then for $f$, if $k\geq 0$, $m(E_{2^k}) = 2^{-dk/a}v_d$; if 
+    $k<0$, $m(E_{2^k}) = v_d$. Hence 
+    \begin{equation*}
+        \sum_{k\in\Z} 2^k m(E_{2^k}) = \sum_{k\geq 0} 2^k 2^{-dk/a}v_d + \sum_{k<0} 2^k v_d 
+        = v_d\pth{1 + \sum_{k\geq 0} 2^{k(1-d/a)}}.
+    \end{equation*}
+    The sum converges if and only if $a<d$. Similarly, for $g$, if $k>0$, 
+    $m(E_{2^k}) = 0$; if $k\leq 0$, $m(E_{2^k}) = (2^{-dk/b}-1)v_d$. Hence 
+    \begin{equation*}
+        \sum_{k\in\Z} 2^k m(E_{2^k}) = \sum_{k\leq 0} 2^k (2^{-dk/b}-1)v_d 
+        = v_d\pth{-1 + \sum_{k\leq 0} 2^{k(1-d/b)}}.
+    \end{equation*} 
+    The sum converges if and only if $b>d$. This completes the proof.
 \end{pf}
+
+\begin{exercise}\exelab{2.11}
+    
+\end{exercise}
