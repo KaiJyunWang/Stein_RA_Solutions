@@ -331,5 +331,124 @@
 \end{pf}
 
 \begin{exercise}\exelab{2.11}
-    
+    Prove that if $f:\R^d\to\R$ is integrable, and $\int_E f \geq 0$ for 
+    every measurable set $E$, then $f\geq 0$ almost everywhere. As a result, 
+    if $\int_E f = 0$ for every measurable set $E$, then $f=0$ almost 
+    everywhere. 
+\end{exercise}
+\begin{pf}
+    Since $f$ is measurable, consider $A = \Set{x}{f(x)< 0}$, which is 
+    measurable. Then $\int_A f = 0$. It follows that $m(A) = 0$. Hence 
+    $f\geq 0$ almost everywhere. If $\int_E f\leq 0$ for every measurable 
+    $E$, then $\int_E -f \geq 0$ and thus $-f\geq 0\Leftrightarrow f\leq 0$ 
+    almost everywhere. Combining these two results, we have $f=0$ almost 
+    everywhere provided that $\int_E f = 0$ for every measurable set $E$.
+\end{pf}
+
+\begin{exercise}\exelab{2.12}
+    Show that there are $f\in L^1(\R^d)$ and a sequence $\set{f_n}\in L^1(\R^d)$ 
+    such that 
+    \begin{equation*}
+        \Lonenorm{f_n-f}\to 0,
+    \end{equation*}
+    but $f_n(x)\to f$ for no $x$.
+\end{exercise}
+\begin{pf}
+    Consider the sequence of sets $\F_n$ collecting rectangular partitions 
+    of $[-2^n,2^n]^d$, with each set has measure $2^{-nd}$. Now consider 
+    the union $\F$, ordered as $\F_1,\F_2,\ldots$, i.e., the sets would 
+    be arranged so that a set from $\F_m$ is arranged after a set from $\F_n$ 
+    if $m>n$. Let $f_n$ be the characteristic function of the $n$-th set in 
+    $\F$. Then $f_n\to 0$ in $L^1$ since the measure of each set in $\F_n$ 
+    is $2^{-nd}$. However, $f_n$ does not converge to $0$ pointwisely since 
+    every points in $\R^d$ is contained by at least one and at most $2^{d+1}$ 
+    sets in $\F_n$. 
+\end{pf}
+
+\begin{exercise}\exelab{2.13}
+    Give an example of two measurable sets $A,B$ such that $A+B$ is 
+    not measurable.
+\end{exercise}
+\begin{pf}
+    Let $V$ be the Vitali set. Then consider $A = \set{0}\times[0,1]$ 
+    and $B = V\times\set{0}$. Then $A+B = \Set{(x,y)}{x\in V, y\in[0,1]} 
+    = V\times[0,1]$. If $A+B$ is measurable, then since $m([0,1])=1$, 
+    $V$ would be measurable, which is a contradiction. Hence $A+B$ is not 
+    measurable. However, it is clear that $A,B$ are measurable since 
+    they are both of measure zero. 
+\end{pf}
+
+\begin{exercise}\exelab{2.14}
+    Let $v_d = m(B)$, where $B$ is the unit ball in $\R^d$. 
+    \begin{thmenum}
+        \item For $d = 2$, prove that 
+        \begin{equation*}
+            v_2 = 2\int_{-1}^{1}(1-x^2)^{1/2}dx.
+        \end{equation*}
+        and hence by elementary calculus, $v_2 = \pi$. 
+        \item By similar methods, show that 
+        \begin{equation*}
+            v_d = 2v_{d-1}\int_{0}^{1}(1-x^2)^{(d-1)/2}dx.
+        \end{equation*}
+        \item The result is 
+        \begin{equation*}
+            v_d = \frac{\pi^{d/2}}{\Gamma(1+d/2)}.
+        \end{equation*}
+    \end{thmenum}
+\end{exercise}
+\begin{pf}
+    For (a), since $f(x) = \sqrt{1-x^2}$ is continuous on $[-1,1]$, it is 
+    measurable and hence so is $B$ in $\R^2$ since we may write $B$ as 
+    \begin{equation*}
+        \Set{(x,y)}{0\leq y\leq f(x), x\in[-1,1]}\cup\Set{(x,y)}{-f(x)\leq y\leq 0, x\in[0,1]}, 
+    \end{equation*}
+    which is clearly measurable and 
+    \begin{equation*}
+        v_2 = 2\int_{-1}^{1} \sqrt{1-x^2}dx = \pi.
+    \end{equation*} 
+
+    For (b), now given any $x\in[-1,1]$, the slice of $B$ at $x$ 
+    is a unit ball with radius $\sqrt{1-x^2}$ in $\R^{d-1}$. Hence 
+    \begin{equation*}
+        v_d = \int_{-1}^{1} (1-x^2)^{(d-1)/2}v_{d-1}dx = 2v_{d-1}\int_{0}^{1} (1-x^2)^{(d-1)/2}dx.
+    \end{equation*}
+
+    For (c), we first note that by letting $t = x^2$,
+    \begin{equation*}
+        \begin{split}
+            \int_{0}^{1} (1-x^2)^{(d-1)/2}dx 
+            &= \frac{1}{2}\int_{0}^{1} (1-t)^{(d-1)/2}t^{-1/2}dt \\
+            &= \frac{1}{2} B(\frac{1}{2}, \frac{d+1}{2}) \\
+            &= \frac{1}{2} \frac{\Gamma(1/2)\Gamma((d+1)/2)}{\Gamma(1+d/2)} = \frac{1}{2} \frac{\pi^{1/2}\Gamma((d+1)/2)}{\Gamma(1+d/2)}
+        \end{split}
+    \end{equation*}
+    Hence 
+    \begin{equation*}
+        v_d = 2v_{d-1}\int_{0}^{1} (1-x^2)^{(d-1)/2}dx = v_{d-1}\frac{\pi^{1/2}\Gamma((d+1)/2)}{\Gamma(1+d/2)}.
+    \end{equation*}
+    Now we proceed by induction on $d$. The base case is $d=2$, which has been
+    shown in (a). Now suppose the result holds for $d-1$. Then 
+    \begin{equation*}
+        v_d = v_{d-1}\frac{\pi^{1/2}\Gamma((d+1)/2)}{\Gamma(1+d/2)} = \frac{\pi^{d/2}\Gamma((d+1)/2)}{\Gamma(1+d/2)\Gamma(1+(d-1)/2)} 
+        = \frac{\pi^{d/2}}{\Gamma(1+d/2)}.
+    \end{equation*}
+    By induction, the result holds for all $d\geq 2$. The case $d=1$ is trivial.
+\end{pf}
+
+\begin{exercise}\exelab{2.15}
+    Consider the function defined over $\R$ by 
+    \begin{equation*}
+        f(x) = \begin{cases}
+            x^{-1/2} & \text{ if $0<x<1$,} \\
+            0 & \text{ otherwise.}
+        \end{cases}
+    \end{equation*}
+    For a fixed enumeration $\set{r_n}$ of the rationals $\Q$, let 
+    \begin{equation*}
+        F(x) = \sum_{n=1}^{\infty} 2^{-n}f(x-r_n).
+    \end{equation*}
+    Prove that $F$ is integrable, hence the series defining $F$ converges 
+    for almost every $x\in\R$. However, observe that this series is 
+    unbounded on every interval, and in fact, any function $\tilde{F}$ 
+    that agrees with $F$ almost everywhere is unbounded in any interval.
 \end{exercise}
