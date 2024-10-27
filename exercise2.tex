@@ -452,3 +452,127 @@
     unbounded on every interval, and in fact, any function $\tilde{F}$ 
     that agrees with $F$ almost everywhere is unbounded in any interval.
 \end{exercise}
+\begin{pf}
+    By Lebesgue's monotone convergence theorem, it suffices to show that
+    \begin{equation*}
+        \sum_n 2^{-n}\int f(x-r_n) < \infty.
+    \end{equation*} 
+    Now note that the integral is invariant under translation and hence 
+    it remains to show that $\sum_n 2^{-n}\int f(x) < \infty$. By 
+    \exeref{2.10}, $f(x)$ is integrable. It follows that the series converges 
+    and hence $F$ is integrable. Now for any interval $I$, by the density 
+    of $\Q$, there exists $r_n\in I$, and we may pick $x\in I$ arbitrarily 
+    close to $r_n$ so that $f(x-r_n)$ can be arbitrarily large. Hence $F$ is 
+    unbounded on every interval. If $\tilde{F}=F$ almost everywhere, and 
+    $\tilde{F}$ is bounded on some open interval (we may always pick the 
+    interior), say by $M$, then there exists $r_n\in I$, and 
+    $f^{-1}((M,\infty))\cap I = (r_n, r_n + 1/M^2)\cap I$ has positive 
+    measure. Thus $\tilde{F}$ cannot agree with $F$ almost everywhere. By 
+    contradiction, $\tilde{F}$ is unbounded in any interval.
+\end{pf}
+
+\begin{exercise}\exelab{2.16}
+    Suppose $f$ is integrable on $\R^d$. If $\delta = (\delta_1,\ldots,\delta_d)$ 
+    is a $d$-tuple of non-zero real numbers. Show that the function 
+    $x\mapsto f(\delta x) = f(\delta_1x_1,\ldots,\delta_dx_d)$ is integrable 
+    with 
+    \begin{equation*}
+        \int f(\delta x)dx = \abs{\delta_1}^{-1}\cdots\abs{\delta_d}^{-1}\int f(x)dx.
+    \end{equation*}  
+\end{exercise}
+\begin{pf}
+    We proceed by induction on $d$. For the base case where $d = 1$, 
+    note that it suffices to show the case where $f$ is nonegative and 
+    simple. To see this we may reduce the case to characteristic functions. 
+    Now consider $\chi_A$, where $A$ is a measurable set. Then note that 
+    \begin{equation*}
+        \int \chi_A(\delta x)dx = m(\delta^{-1}A) = \abs{\delta}^{-1}m(A) 
+        = \abs{\delta}^{-1}\int \chi_A(x)dx.
+    \end{equation*}
+    Now suppose the result holds for $d-1$. Then by Fubini's theorem, 
+    \begin{equation*}
+        \begin{split}
+            \int f(\delta x)dx 
+            &= \int_{\R} \int_{\R^{d-1}} f(\delta_1x_1, \ldots, \delta_{d-1}x_{d-1}, \delta_dx_d)(dx_1\cdots dx_{d-1})dx_d \\
+            &= \int_{\R} \int_{\R^{d-1}} \abs{\delta_1}^{-1}\cdots\abs{\delta_{d-1}}^{-1}f(x_1,\ldots,x_{d-1},\delta_d x_d)(dx_1\cdots dx_{d-1})dx_d \\
+            &= \int_{\R^{d-1}} \int_{\R} \abs{\delta_1}^{-1}\cdots\abs{\delta_d}^{-1}f(x_1,\ldots,x_{d-1}, x_d)dx_d(dx_1\cdots dx_{d-1}) \\
+            &= \abs{\delta_1}^{-1}\cdots\abs{\delta_d}^{-1}\int f(x)dx,
+        \end{split}
+    \end{equation*}
+    and since $f$ is integrable, the computation is justified. By induction, 
+    the result holds for all $d$.
+\end{pf}
+
+\begin{exercise}\exelab{2.17}
+    Suppose $f$ is defined on $\R^2$ as follows: $f(x,y) = a_n$ if $n\leq x <n+1$ 
+    and $n\leq y < n+1$; $f(x,y) = -a_n$ if $n\leq x < n+1$ and $n+1\leq y < n+2$; 
+    while $f(x,y) = 0$ otherwise. Define $a_n = \sum_{k=0}^{n} b_k$ with $\set{b_k}$ 
+    being a positive sequence such that $\sum_k b_k = s <\infty$.
+    \begin{thmenum}
+        \item Verify that each slice $f^y$ and $f_x$ is integrable. Also for all 
+        $x$, $\int f_x(y)dy = 0$ and hence $\int\int f(x,y)dydx = 0$.
+        \item However, $\int f^y(x)dx = a_0$ if $0\leq y<1$, and $\int f^y(x)dx 
+        = a_n - a_{n-1}$ if $n\leq y < n+1$. Hence $y\mapsto \int f^y(x)dx$ is an 
+        integrable function on $(0,\infty)$ and 
+        \begin{equation*}
+            \int\int f(x,y)dxdy = s.
+        \end{equation*}
+        \item Show that $\int_{\R^2} \abs{f(x,y)}dxdy = \infty$.
+    \end{thmenum} 
+\end{exercise}
+\begin{pf}
+    Given $y\in[n,n+1)$, $f^y = a_n\chi_{[n,n+1)} - a_{n-1}\chi_{[n-1,n)}$ for $n\neq 0$ 
+    and $f^y = a_0\chi_{[0,1)}$ for $n=0$. Given $x\in[n,n+1)$, 
+    $f_x = a_n\chi_{[n,n+1)} - a_n\chi_{[n+1,n+2)}$. Hence 
+    \begin{equation*}
+        \int \abs{f^y(x)}dx = \begin{cases}
+            2a_n & \text{ if $n\neq 0$,} \\
+            a_0 & \text{ if $n=0$.}
+        \end{cases}
+    \end{equation*} 
+    and 
+    \begin{equation*}
+        \int \abs{f_x(y)}dy = 2a_n.
+    \end{equation*}
+    Since $a_n$ is convergent, $f^y$ and $f_x$ are integrable. Also, 
+    $\int f_x(y)dy = a_n - a_n = 0$ for all $x\geq 0$. Thus the integral 
+    of $f_x$ is zero and 
+    \begin{equation*}
+        \int\int f(x,y)dydx = 0.
+    \end{equation*} 
+    Also, $\int f^y(x)dx = a_0$ if $y\in[0,1)$ and $\int f^y(x)dx = a_n - a_{n-1}$ 
+    if $y\geq 1$. Hence $y\mapsto\int f^y(x)dx$ is integrable and 
+    \begin{equation*}
+        \int\int f^y(x)dxdy = a_0 + a_1 - a_0 + a_2 - a_1 + \cdots = s.
+    \end{equation*} 
+    Lastly, 
+    \begin{equation*}
+        \int_{\R^2} \abs{f(x,y)}dxdy = a_0 + 2a_1 + 2a_2 + \cdots 
+        = -a_0 + 2\sum_{n=0}^{\infty}a_n.
+    \end{equation*}
+    Since $a_n$ does not converge to zero, the series diverges and hence 
+    the $f$ is not integrable.
+\end{pf}
+
+\begin{exercise}\exelab{2.18}
+    Let $f$ be a measurable finite-valued function on $[0,1]$, and 
+    suppose that $\abs{f(x)-f(y)}$ is integrable on $[0,1]^2$. Show 
+    that $f$ is integrable on $[0,1]$.
+\end{exercise}
+\begin{pf}
+    By Fubini's theorem, we know that for every $y\in[0,1]$, 
+    the slice $x\mapsto\abs{f(x)-f(y)}$ is integrable on $[0,1]$. 
+    Consider the case where $y=0$, then $\abs{f(x)-f(0)}$ is 
+    integrable on $[0,1]$. Since $f$ is finite-valued, 
+    $\abs{f(x)}\leq \abs{f(x)-f(0)}+\abs{f(0)}$, which are 
+    integrable on $[0,1]$, and hence $f$ is integrable on 
+    $[0,1]$.
+\end{pf}
+
+\begin{exercise}\exelab{2.19}
+    Suppose $f$ is integrable on $\R^d$. For each $\alpha>0$, 
+    let $E_\alpha = \Set{x}{\abs{f(x)}>\alpha}$. Prove that 
+    \begin{equation*}
+        \int_{\R^d} \abs{f(x)}dx = \int_{0}^{\infty} m(E_\alpha)d\alpha.
+    \end{equation*}
+\end{exercise}
