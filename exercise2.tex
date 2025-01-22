@@ -576,3 +576,214 @@
         \int_{\R^d} \abs{f(x)}dx = \int_{0}^{\infty} m(E_\alpha)d\alpha.
     \end{equation*}
 \end{exercise}
+\begin{pf}
+    Note that by Fubini's theorem,
+    \begin{equation*}
+        \begin{split}
+            \int_{0}^{\infty} m(E_\alpha)d\alpha 
+            &= \int_{0}^{\infty} \int_{\R^d} \chi_{E_\alpha}(x)dxd\alpha 
+            = \int_{\R^d} \int_{0}^{\infty} \chi_{E_\alpha}(x)d\alpha dx \\
+            &= \int_{\R^d} \int_{0}^{\abs{f(x)}}d\alpha dx 
+            = \int_{\R^d} \abs{f(x)}dx.
+        \end{split}
+    \end{equation*}
+    The second last equality follows from the definition of $E_\alpha$.
+\end{pf}
+
+
+\begin{exercise}\exelab{2.20}
+    Suppose $E$ is a Borel set in $\R^2$. Then for each $y$, the 
+    slice $E^y$ is a Borel set in $\R$.
+\end{exercise}
+\begin{pf}
+    Let $\F$ collect all sets $A\subset \R^2$ such that $A^y$ is a Borel 
+    set in $\R$ for all $y$. We first show that $\F$ forms a $\sigma$-algebra, 
+    and then show that every open set in $\R^2$ falls into $\F$. 
+
+    First, note that the slice of $\R^2$ is $\R$ and hence $\R^2\in\F$. Next, 
+    for any $A\in\F$, notice that $(A^c)^y = (A^y)^c$ is Borel and hence 
+    $A^c\in\F$. Lastly, for any countable collection $\set{A_n}\subset\F$, 
+    $(\bigcup_n A_n)^y = \bigcup_n A_n^y$ is Borel and hence $\bigcup_n A_n\in\F$. 
+    We see that $\F$ is a $\sigma$-algebra. 
+
+    Now for any open $V\subset\R^2$, if there is a $y$ such that $V^y$ is not 
+    open, then there exists $x$ such that $(x-\delta, x+\delta)\not\subset V^y$ 
+    for any $\delta>0$. This implies that the ball $B_\delta(x,y)$ in $\R^2$ 
+    is not contained in $V$ for every $\delta>0$. Hence $V$ is not open in $\R^2$. 
+    By contradiction, $V^y$ is open for all $y$ and hence $V\in\F$. It follows 
+    that $\F$ contains all open sets and hence all Borel sets in $\R^2$. The 
+    result follows.
+\end{pf}
+
+\begin{exercise}\exelab{2.21}
+    Suppose $f$ and $g$ are measurable on $\R^d$. 
+    \begin{thmenum}
+        \item Prove that $f(x-y)g(y)$ is measurable on $\R^{2d}$. 
+        \item Show that if $f$ and $g$ are integrable on $\R^d$, then $f(x-y)g(y)$ 
+        is integrable on $\R^{2d}$. 
+        \item For integrable $f$ and $g$, the convolution of $f$ and $g$ is defined by 
+        \begin{equation*}
+            (f*g)(x) = \int f(x-y)g(y)dy.
+        \end{equation*}
+        Show that $f*g$ is well-defined for a.e.\ $x$, i.e., $f*g$ is finite for 
+        a.e.\ $x$. 
+        \item Show that $f*g$ is integrable whenever $f$ and $g$ are integrable, 
+        and that 
+        \begin{equation*}
+            \norm{f*g}_1 \leq \norm{f}_1\norm{g}_1
+        \end{equation*}
+        with equality if $f$ and $g$ are nonnegative. 
+        \item The Fourier transform of an integrable function $f$ is defined by 
+        \begin{equation*}
+            \hat{f}(\xi) = \int f(x)e^{-2\pi i x\cdot\xi}dx.
+        \end{equation*}
+        Show that $\hat{f}$ is bounded and continuous. Prove that for each $\xi$, 
+        \begin{equation*}
+            \widehat{f*g}(\xi) = \hat{f}(\xi)\hat{g}(\xi).
+        \end{equation*}
+    \end{thmenum}
+\end{exercise}
+\begin{pf}
+    For (a), note that $f(x-y)$ is measurable on $\R^{2d}$.\footnote{This is from 
+    proposition 2.3.9 in the textbook.} Since $g$ is measurable, $\R^d\times g^{-1}(E)$ 
+    is measurable for any Borel $E\subset\R$. Thus we see that $\hat{g}(x,y) = g(y)$ 
+    is measurable and hence $f(x-y)g(y)$ is measurable. 
+
+    For (b), by the translation invariance of the integral, 
+    \begin{equation*}
+        \int \abs{f(x-y)}dx = \int \abs{f(x)}dx.
+    \end{equation*}
+    Thus by Fubini's theorem, 
+    \begin{equation*}
+        \begin{split}
+            \int_{\R^{2d}} \abs{f(x-y)g(y)} &= \int\int \abs{g(y)}\abs{f(x-y)}dx dy 
+            = \int\abs{g(y)}\int\abs{f(x-y)}dx dy \\ 
+            &= \int\abs{g(y)}\int\abs{f(x)}dx dy = \norm{f}_1\norm{g}_1 < \infty.
+        \end{split}
+    \end{equation*}
+    Hence $f(x-y)g(y)$ is integrable on $\R^{2d}$ provided that $f$ and $g$ are integrable.
+
+    For (c), by (b) we see that $f(x-y)g(y)$ is integrable on $\R^{2d}$. From 
+    Fubini's theorem, the function $x\mapsto f(x-y)g(y)$ is integrable for a.e.\ $y$. 
+    Hence the convolution is well-defined for a.e.\ $x$. 
+
+    (d) follows directly from (b) and Fubini's theorem. 
+    \begin{equation*}
+        \norm{f*g}_1 = \int \abs{\int f(x-y)g(y)dy}dx \leq \int \int \abs{f(x-y)g(y)}dydx 
+        = \norm{f}_1\norm{g}_1<\infty.
+    \end{equation*}
+    The equality holds if $f$ and $g$ are of the same sign a.e., in particular, if 
+    $f$ and $g$ are nonnegative. 
+
+    Lastly, for (e), 
+    \begin{equation*}
+        \abs{\hat{f}(\xi)} \leq \int \abs{f(x)}\abs{e^{-2\pi i x\cdot\xi}}dx 
+        \leq \int \abs{f(x)}dx = \norm{f}_1<\infty.
+    \end{equation*}
+    This shows that $\hat{f}$ is bounded. To show that $\hat{f}$ is continuous, 
+    let $\xi_n\to\xi$. Then since $f$ is integrable and 
+    $\abs{e^{-2\pi i x\cdot\xi}}\abs{f(x)}\leq \abs{f(x)}$, we may apply 
+    the Lebesgue dominated convergence theorem to see that 
+    \begin{equation*}
+        \lim_{n\to\infty} \hat{f}(\xi_n) = \lim_{n\to\infty} \int f(x)e^{-2\pi i x\cdot\xi_n}dx 
+        = \int f(x)e^{-2\pi i x\cdot\xi}dx = \hat{f}(\xi).
+    \end{equation*}
+    Now for each $\xi$, 
+    \begin{equation*}
+        \begin{split}
+            \widehat{f*g}(\xi) &= \int (f*g)(x)e^{-2\pi i x\cdot\xi}dx 
+            = \int\int f(x-y)g(y)e^{-2\pi i x\cdot\xi}dydx \\ 
+            &= \int\int f(x-y)g(y)e^{-2\pi i x\cdot\xi}dxdy 
+            = \int\int f(z)g(y)e^{-2\pi i (z+y)\cdot\xi}dzdy \\ 
+            &= \int f(z)e^{-2\pi i z\cdot\xi}dz\int g(y)e^{-2\pi i y\cdot\xi}dy 
+            = \hat{f}(\xi)\hat{g}(\xi).
+        \end{split}
+    \end{equation*}
+    The fourth equality follows from Fubini's theorem and the fifth equality 
+    holds by setting $z=x-y$. This completes the proof.
+\end{pf}
+
+\begin{exercise}[Riemann-Lebesgue]\exelab{2.22}
+    Prove that if $f\in \L^1(\R^d)$ and 
+    \begin{equation*}
+        \hat{f}(\xi) = \int f(x)e^{-2\pi i x\cdot\xi}dx,
+    \end{equation*}
+    then $\hat{f}(\xi)\to 0$ as $\abs{\xi}\to\infty$.
+\end{exercise}
+\begin{pf}
+    Notice that 
+    \begin{equation*}
+        \begin{split}
+            \int \sbrc{f(x)-f\pth{x - \frac{1}{2}\frac{\xi}{\abs{\xi}^2}}}e^{-2\pi i x\cdot\xi}dx 
+            &= \int f(x)e^{-2\pi i x\cdot\xi}dx - \int f\pth{x - \frac{1}{2}\frac{\xi}{\abs{\xi}^2}}e^{-2\pi i x\cdot\xi}dx \\
+            &= \int f(x)e^{-2\pi i x\cdot\xi}dx - \int f(y)e^{-2\pi i (y+\frac{1}{2}\frac{\xi}{\abs{\xi}^2})\cdot\xi}dy \\
+            &= 2\int f(x)e^{-2\pi i x\cdot\xi}dx.
+        \end{split}
+    \end{equation*}
+    Hence 
+    \begin{equation*}
+        \hat{f}(\xi) = \int f(x)e^{-2\pi i x\cdot\xi}dx = \frac{1}{2}\int \sbrc{f(x)-f\pth{x - \frac{1}{2}\frac{\xi}{\abs{\xi}^2}}}e^{-2\pi i x\cdot\xi}dx
+    \end{equation*}
+    and
+    \begin{equation*}
+        \abs{\hat{f}(\xi)} \leq \frac{1}{2}\int \abs{f(x)-f\pth{x - \frac{1}{2}\frac{\xi}{\abs{\xi}^2}}}dx.
+    \end{equation*}
+    As $\abs{\xi}\to\infty$, $\frac{1}{2}\frac{\xi}{\abs{\xi}^2}\to 0$ and by proposition 2.5, 
+    the right hand side converges to zero. 
+\end{pf}
+
+\begin{exercise}\exelab{2.23}
+    Show that there is no function $I\in\L^1(\R^d)$ such that $f*I = f$ for all $f\in\L^1(\R^d)$.
+\end{exercise}
+\begin{pf}
+    Suppose $I$ is such a function. Then in particular $I*I = I$. By \exeref{2.21}, 
+    $\hat{I} = \widehat{I*I} = \hat{I}^2$. Since $\hat{I}$ is bounded, $\hat{I} = 0$ or 
+    $\hat{I} = 1$. If $\hat{I} = 0$, then $I = 0$ a.e.\ by the inverse Fourier transform. 
+    For every $f\in\L^1(\R^d)$, $f*I = 0$, which is absurd. If $\hat{I} = 1$, then 
+    by the inverse Fourier transform, 
+    \begin{equation*}
+        \norm{I(x)} = \int \abs{\hat{I}(\xi)e^{2\pi i x\cdot\xi}}d\xi = \int \abs{e^{2\pi i x\cdot\xi}}d\xi = \infty,
+    \end{equation*}
+    which is also a contradiction. Hence there is no such function $I$.
+\end{pf}
+
+\begin{exercise}\exelab{2.24}
+    Consider the convolution 
+    \begin{equation*}
+        (f*g)(x) = \int f(x-y)g(y)dy.
+    \end{equation*}
+    \begin{thmenum}
+        \item Show that if $f$ is integrable and $g$ is bounded, then $f*g$ is uniformly 
+        continuous.
+        \item If in addition $g$ is integrable, prove that $(f*g)(x)\to 0$ as $\abs{x}\to\infty$. 
+    \end{thmenum}
+\end{exercise}
+\begin{pf}
+    For (a), let $\epsilon>0$. Suppose $\abs{g}\leq M$. Then 
+    \begin{equation*}
+        \begin{split}
+            \abs{(f*g)(x)-(f*g)(z)} &\leq \int \abs{f(x-y)g(y)-f(z-y)g(y)}dy \\ 
+            &\leq M\int \abs{f(x-y)-f(z-y)}dy.
+        \end{split}
+    \end{equation*}
+    Since $f$ is integrable, there exists a continuous function $h$ with compact 
+    support such that $\norm{f-h}_1<\epsilon$. Notice that $h$ is thus uniformly 
+    continuous. Then  
+    \begin{equation*}
+        \begin{split}
+            \int \abs{f(x-y)-f(z-y)}dy &\leq 2\norm{f-h}_1 + \int \abs{h(x-y)-h(z-y)}dy \\
+            &\leq 2\epsilon + \int \abs{h(x-y)-h(z-y)}dy.
+        \end{split}
+    \end{equation*}
+    By the uniform continuity of $h$, there exists $\delta>0$ such that 
+    $\abs{x-z}<\delta$ implies that $\abs{h(x-y)-h(z-y)}<\epsilon$. Also, 
+    since $h$ has compact support, say of measure $L$, as function of $y$, 
+    $\abs{h(x-y)-h(z-y)}$ has support of measure at most $2L$. Thus the 
+    integral on the right hand side is less than $2L\epsilon$. Combining 
+    the results above, we see that $\abs{(f*g)(x)-(f*g)(z)}
+    \leq M(2\epsilon + 2L\epsilon)$ whenever $\abs{x-z}<\delta$. Since 
+    $\epsilon$ is arbitrary, $f*g$ is uniformly continuous.
+
+    For (b), if $\widehat{f*g}\in\L^1(\R^d)$, then by the Riemann-Lebesgue 
+    lemma, $\widehat{f*g}(\xi)\to 0$ as $\abs{\xi}\to\infty$. 
+\end{pf}
