@@ -223,3 +223,54 @@ solutions, I have included them in this appendix.
     $G^{-1}(\set{0,1})$ is closed and disjoint from $A$, by 
     \lemref{A.2}, the proof is finished.
 \end{pf}
+
+\begin{lemma}[Young's Inequality]\lemlab{A.5}
+    Let $1\leq p,p'\leq\infty$ with $\frac{1}{p}+\frac{1}{p'}=1$. 
+    Then for all $a,b\geq 0$, 
+    \begin{equation*}
+        ab \leq \frac{a^p}{p} + \frac{b^{p'}}{p'}.
+    \end{equation*}
+    Moreover, the equality holds if and only if $a^p = b^{p'}$.
+\end{lemma}
+\begin{pf}
+    If $a = 0$ or $b = 0$, the inequality is trivial. 
+    Assume that $a,b>0$. By the concavity of logarithm, 
+    \begin{equation*}
+        \log\pth{\frac{a^p}{p} + \frac{b^{p'}}{p'}} \geq \frac{1}{p}\log a^p + \frac{1}{p'}\log b^{p'} = \log ab.
+    \end{equation*}
+    Exponentiating both sides yields the desired inequality.
+\end{pf}
+
+\begin{theorem}[H\"older's Inequality in $\L^p$]\thmlab{A.6}
+    Let $1\leq p,p'\leq\infty$ with $\frac{1}{p}+\frac{1}{p'}=1$. 
+    Then for all $f\in\L^p$ and $g\in\L^{p'}$, 
+    \begin{equation*}
+        \norm{fg}_1 \leq \norm{f}_p\norm{g}_{p'}.
+    \end{equation*}
+    Moreover, the equality holds if and only if $f = cg$ for some 
+    constant $c$.
+\end{theorem}
+\begin{pf}
+    For the case $p = 1$ and $p' = \infty$, notice that
+    \begin{equation*}
+        \abs{fg} \leq \abs{f}\esssup \abs{g} \implies 
+        \norm{fg}_1 = \int \abs{fg}d\mu \leq \int \abs{f}\esssup\abs{g}d\mu = \norm{f}_1\norm{g}_\infty.
+    \end{equation*}
+    For the case $p = \infty$ and $p' = 1$, the proof is similar. 
+    Now suppose $1<p<\infty$ and $1<p'<\infty$. If one of $f$ or 
+    $g$ is zero, the inequality is trivial. Without loss of 
+    generality, we may assume that $\norm{f}_p = \norm{g}_{p'} = 1$. 
+    By the \lemref{A.5}, 
+    \begin{equation*}
+        \abs{fg} \leq \frac{\abs{f}^p}{p} + \frac{\abs{g}^{p'}}{p'}.
+    \end{equation*}
+    Integrating both sides yields
+    \begin{equation*}
+        \norm{fg}_1 = \int \abs{fg}d\mu \leq \int \frac{\abs{f}^p}{p}d\mu + \int \frac{\abs{g}^{p'}}{p'}d\mu 
+        = \frac{1}{p} + \frac{1}{p'} = 1.
+    \end{equation*}
+    Hence we obtain the desired inequality. The equality holds if 
+    and only if $\abs{f}^p = \abs{g}^{p'}$ a.e.\ by the \lemref{A.5}. 
+    In general, the equality holds if and only if $f = cg$ a.e.\ for some 
+    constant $c$ after scaling the both sides of the inequality by $c$.
+\end{pf}

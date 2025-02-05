@@ -1,0 +1,49 @@
+\begin{problem}\prolab{2.1}
+    If $f$ is integrable on $[0,2\pi]$, then 
+    \begin{equation*}
+        \int_0^{2\pi} f(x)e^{-ikx}dx \to 0, \quad \text{as } \abs{k}\to\infty.
+    \end{equation*}
+    Show as a consequence that if $E$ is a 
+    measurable subset of $[0,2\pi]$, then 
+    \begin{equation*}
+        \int_E \cos^2(nx + u_n)dx \to \frac{m(E)}{2}, \quad \text{as } n\to\infty
+    \end{equation*}
+    for any sequence $\{u_n\}$.
+\end{problem}
+\begin{pf}
+    Compute the integral. 
+    \begin{equation*}
+        \begin{split}
+            \int_E \cos^2(nx + u_n)dx &= \int_E \frac{1}{2} + \frac{1}{2}\cos(2(nx + u_n))dx \\
+            &= \frac{m(E)}{2} + \frac{1}{2}\cos(2nu_n)\int_E \cos(2nx)dx - \frac{1}{2}\sin(2nu_n)\int_E\sin(2nx)dx. \\
+        \end{split}
+    \end{equation*}
+    Now we prove that the last two integrals go to zero as $n\to\infty$. Notice that 
+    by the statement of the problem, we have in particular that when $f = \chi_E$, 
+    \begin{equation*}
+        \int_E \cos(kx)dx + i\int_E \sin(kx)dx = \int_E e^{-ikx}dx \to 0, \quad \text{as } \abs{k}\to\infty.
+    \end{equation*}
+    Hence 
+    \begin{equation*}
+        \begin{cases*}
+            \int_E \cos(2nx)dx \to 0, \quad \text{as } n\to\infty, \\
+            \int_E \sin(2nx)dx \to 0, \quad \text{as } n\to\infty.
+        \end{cases*}
+    \end{equation*}
+    Since both $\cos(2nu_n)$ and $\sin(2nu_n)$ are bounded, we have that 
+    the last two integrals go to zero as $n\to\infty$. It follows that 
+    \begin{equation*}
+        \int_E \cos^2(nx + u_n)dx \to \frac{m(E)}{2}, \quad \text{as } n\to\infty.
+    \end{equation*}
+\end{pf}
+
+\begin{problem}[Cantor-Lebesgue]\prolab{2.2}
+    If the series 
+    \begin{equation*}
+        \sum_{n=0}^{\infty} A_n(x) = \sum_{n=0}^{\infty} a_n\cos nx + b_n\sin nx
+    \end{equation*}
+    converges for $x\in E$, where $E$ is of positive measure, then $a_n,b_n\to 0$ as $n\to\infty$.
+\end{problem}
+\begin{pf}
+    
+\end{pf}
