@@ -72,6 +72,14 @@
     it is clear that $a_n, b_n\leq r_n\to 0$ as $n\to\infty$.
 \end{pf}
 
+\begin{definition}
+    A sequence $\set{f_k}$ of functions is said to \textbf{converge in measure} to a function $f$ 
+    if for every $\epsilon > 0$, 
+    \begin{equation*}
+        m\pth{\Set{x}{\abs{f_k(x) - f(x)} > \epsilon}} \to 0, \quad \text{as } k\to\infty.
+    \end{equation*}
+\end{definition}
+
 \begin{problem}\prolab{2.3}
     Prove that if a sequence $\set{f_k}$ of integrable functions converges to $f$ in $L^1$, then 
     $\set{f_k}$ converges to $f$ in measure. Is the converse true?
