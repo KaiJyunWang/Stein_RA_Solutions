@@ -11,7 +11,8 @@
     for any sequence $\{u_n\}$.
 \end{problem}
 \begin{pf}
-    Compute the integral. 
+    The first statement is a direct consequence of \exeref{2.22}, with $f$ replaced by $f\chi_{[0,2\pi]}$ 
+    and $\xi$ replaced by $k/(2\pi)$. Compute the integral. 
     \begin{equation*}
         \begin{split}
             \int_E \cos^2(nx + u_n)dx &= \int_E \frac{1}{2} + \frac{1}{2}\cos(2(nx + u_n))dx \\
@@ -19,7 +20,7 @@
         \end{split}
     \end{equation*}
     Now we prove that the last two integrals go to zero as $n\to\infty$. Notice that 
-    by the statement of the problem, we have in particular that when $f = \chi_E$, 
+    by the first statement in the problem, we have in particular that when $f = \chi_E$, 
     \begin{equation*}
         \int_E \cos(kx)dx + i\int_E \sin(kx)dx = \int_E e^{-ikx}dx \to 0, \quad \text{as } \abs{k}\to\infty.
     \end{equation*}
@@ -45,5 +46,116 @@
     converges for $x\in E$, where $E$ is of positive measure, then $a_n,b_n\to 0$ as $n\to\infty$.
 \end{problem}
 \begin{pf}
+    By Egorov's theorem, there is a set $F$ with positive measure such that 
+    the series converges uniformly on $F$. Put $\epsilon_n = \sup_{x\in F}\abs{A_n(x)}$. 
+    By the convergence of the series, we have that $\epsilon_n\to 0$ as $n\to\infty$. 
+    Now 
+    \begin{equation*}
+        \begin{split}
+            \abs{A_n(x)} &= \abs{a_n\cos nx + b_n\sin nx} \\
+            &= \sqrt{a_n^2 + b_n^2}\abs{\frac{a_n}{\sqrt{a_n^2 + b_n^2}}\cos nx + \frac{b_n}{\sqrt{a_n^2 + b_n^2}}\sin nx} \\
+            &= r_n\abs{\cos(nx - \theta_n)} \geq r_n \cos^2(nx - \theta_n),
+        \end{split}
+    \end{equation*}
+    with $r_n = \sqrt{a_n^2 + b_n^2}$ and $\theta_n$ satisfying that $\cos(\theta_n) = a_n/\sqrt{a_n^2 + b_n^2}$. 
+    For the case when both $a_n$ and $b_n$ are zero, we set $r_n = 0$. Thus 
+    \begin{equation*}
+        \epsilon_nm(F) \geq \int_F \abs{A_n(x)}dx \geq r_n\int_F \cos^2(nx - \theta_n)dx.
+    \end{equation*}
+    Suppose $r_n$ does not go to zero. Then there is a subsequence $r_{n_k}$ such that 
+    $r_{n_k} \geq \delta > 0$ for all $k$. Without loss of generality, we may assume that 
+    $m(F) < \infty$. Taking the limit as $k\to\infty$, we have 
+    \begin{equation*}
+        0 = \lim_{k\to\infty}\epsilon_{n_k}m(F) \geq \lim_{k\to\infty}r_{n_k}\int_F \cos^2(n_{k}x - \theta_{n_k})dx \geq \delta \frac{m(F)}{2} > 0,
+    \end{equation*}
+    by \proref{2.1}. This is a contradiction. Hence $r_n\to 0$ as $n\to\infty$ and 
+    it is clear that $a_n, b_n\leq r_n\to 0$ as $n\to\infty$.
+\end{pf}
+
+\begin{problem}\prolab{2.3}
+    Prove that if a sequence $\set{f_k}$ of integrable functions converges to $f$ in $L^1$, then 
+    $\set{f_k}$ converges to $f$ in measure. Is the converse true?
+\end{problem}
+\begin{pf}
+    For $\epsilon > 0$, let $E_k = \Set{x}{\abs{f_k(x) - f(x)} > \epsilon}$. We 
+    aim to prove that $m(E_k)\to 0$ as $k\to\infty$. Since 
+    \begin{equation*}
+        m(E_k)\epsilon \leq \int_{E_k}\abs{f_k(x) - f(x)}dx \leq \int\abs{f_k(x) - f(x)}dx \to 0
+    \end{equation*}
+    by the convergence in $\L^1$, we have that $m(E_k)\to 0$ as $k\to\infty$. 
     
+    The converse is in general not true. In fact, almost everywhere convergence implies 
+    convergence in measure if $\supp{f_k-f}$ has finite measure. By the Egorov's theorem, 
+    for any $\delta > 0$, we can find a set $F$ such that $m(\supp{f_k-f}-F) < \delta$ and 
+    $f_k\to f$ uniformly on $F^c$, i.e., there is some $N$ such that $\abs{f_k-f}<\epsilon$ 
+    on $F^c$ for all $k\geq N$. Then 
+    \begin{equation*}
+        m\pth{\Set{x}{\abs{f_k(x) - f(x)} > \epsilon}} \leq m(\supp{f_k-f}-F) < \delta,
+    \end{equation*}
+    where $\delta$ can be arbitrarily small. Thus $\set{f_k}$ converges to $f$ in measure.
+    Now simply picking a sequence that converges almost everywhere while not converging in 
+    $\L^1$ will give a counterexample. (For example, say $n^2\chi_{[0,1/n]}$ to $0$ as $n\to\infty$.) 
+    
+    However, it is also possible to find a sequence converging in measure but neither in 
+    $\L^1$ nor almost everywhere. An exmple is given as follows. For any pair of integers 
+    $(m,n)$ with $m\leq n$, let $g_{m,n} = n^2\chi_{[(m-1)/n,m/n]}$. Set $f_1 = g_{1,1}$ and
+    \begin{equation*}
+        f_k = \begin{cases*}
+            g_{1,k} & if $f_{k-1}$ is mapped with $g_{m,n}$, where $m = n$ , \\
+            g_{m+1,n} & if $f_{k-1}$ is mapped with $g_{m,n}$, where $m < n$.
+        \end{cases*}
+    \end{equation*}
+    Then $f_k$ converges to $0$ in measure since for any $\epsilon>0$, $m(\set{\abs{f_k}>\epsilon})$ 
+    decreases to $0$ as the corresponding $n$ increases. However, $f_k$ does not converge in 
+    $\L^1$ since $\int\abs{f_k}dx = n^2/n = n$ for all $k$. Also, $f_k$ does not converge almost 
+    everywhere since every $x\geq 0$ falls into $[(m-1)/n,m/n]$ for infinitely many times.
+\end{pf}
+
+\begin{problem}\prolab{2.4}
+    Prove that if $E$ is a measurable set in $\R^d$ and $T:\R^d\to\R^d$ is a linear transformation, 
+    then 
+    \begin{equation*}
+        m(L(E)) = \abs{\det{T}}m(E).
+    \end{equation*}
+\end{problem}
+\begin{pf}
+    We first show the identity for the case when $T$ is a unitriangular matrix and $d=2$. 
+    If $T$ is an upper one, it represents the transformation $x' = x + ay$ and $y' = y$ for some $a\in\R$. 
+    Then $\chi_{T(E)}(x,y) = \chi_E(T^{-1}(x,y)) = \chi_E(x-ay,y)$. Thus
+    \begin{equation*}
+        m(T(E)) = \int_{\R^2}\chi_{T(E)}(x,y)dxdy = \int_{\R^2}\chi_E(x-ay,y)dxdy = \int_{\R^2}\chi_E(x,y)dxdy = m(E)
+    \end{equation*}
+    by the translation invariance. Similarly, when $T$ is a lower unitriangular matrix, we 
+    have $x' = x$ and $y' = y + ax$ and $m(T(E)) = m(E)$ as well. 
+
+    The result can be extended to the case with any finite $d$ by the exactly same 
+    argument. Now for a general $T$, we can write $T = LDU$, where $L$ is a lower unitriangular 
+    matrix, $D$ is a diagonal matrix, and $U$ is an upper unitriangular matrix. Then 
+    by \exeref{1.7}, we have 
+    \begin{equation*}
+        \begin{split}
+            m(T(E)) &= m(LDU(E)) = m(DU(E)) \\
+            &= \abs{\det{D}}m(U(E)) = \abs{\det{D}}m(E) = \abs{\det{T}}m(E).
+        \end{split}
+    \end{equation*}
+    Hence the identity holds for any linear transformation $T$.
+\end{pf}
+
+\begin{problem}\prolab{2.5}
+    Assume that the continuum hypothesis holds, i.e., if $S$ is an infinite subset 
+    of $\R$, then $S$ is either countable or has the same cardinality as $\R$. Show 
+    that there is an order $\prec$ on $\R$ such that for each $y\in\R$, the set 
+    $\Set{x\in\R}{x\prec y}$ is at most countable.
+\end{problem}
+\begin{pf}
+    By the well-ordering theorem, there is a well-ordering on $\R$, denoted by $\prec$. 
+    Define $X = \Set{y\in\R}{\Set{x\in\R}{x\prec y}\text{ is not countable}}$. If $X$ is 
+    empty, then we are done. Otherwise, let $y_0$ be the smallest element in $X$. 
+    Then the set $\Set{x\in\R}{x\prec y_0}$ has the same cardinality as $\R$ since under 
+    the continuum hypothesis, not countable implies having the same cardinality as $\R$. 
+    Also, observe that every $y\in\Set{x\in\R}{x\prec y_0}$ has the property that 
+    $\Set{x\in\R}{x\prec y}$ is countable. Now there is a bijection 
+    $\phi:\R\to\Set{x\in\R}{x\prec y_0}$ and we can define a new order $\prec'$ on $\R$ 
+    by $x\prec' y$ if and only if $\phi(x)\prec\phi(y)$. Then for any $y\in\R$, the set 
+    $\Set{x\in\R}{x\prec' y}$ is at most countable.
 \end{pf}

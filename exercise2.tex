@@ -803,14 +803,13 @@
 \begin{pf}
     Consider the function 
     \begin{equation*}
-        f(x) = \int_0^{\infty} K_\delta(x)e^{-\pi\delta}\delta^{\epsilon-1}d\delta,
+        f(x) = \int_0^{\infty} e^{-\pi\abs{x}^2/\delta}\delta^{-d/2}e^{-\pi\delta}\delta^{\epsilon-1}d\delta,
     \end{equation*}
-    where $K_\delta(x) = e^{-\pi\abs{x}^2/\delta}\delta^{-d/2}$. We claim that 
-    $f$ is integrable. By Fubini's theorem, 
+    We claim that $f$ is integrable. By Fubini's theorem, 
     \begin{equation*}
         \begin{split}
-            \int_{\R^d} \abs{f(x)}dx &= \int_{\R^d} \int_0^{\infty} e^{-\frac{\pi}{\delta}\abs{x}^2}\delta^{-\frac{d}{2}}e^{-\pi\delta}\delta^{\epsilon-1}d\delta dx \\ 
-            &= \int_0^\infty \int_{\R^d} e^{-\frac{\pi}{\delta}\abs{x}^2}\delta^{-\frac{d}{2}}e^{-\pi\delta}\delta^{\epsilon-1}dx d\delta \\ 
+            \int_{\R^d} \abs{f(x)}dx &= \int_{\R^d} \int_0^{\infty} e^{-\frac{\pi}{\delta}\abs{x}^2}\delta^{-\frac{d}{2}}e^{-\pi\delta}\delta^{\epsilon-1}d\delta dx 
+            = \int_0^\infty \int_{\R^d} e^{-\frac{\pi}{\delta}\abs{x}^2}\delta^{-\frac{d}{2}}e^{-\pi\delta}\delta^{\epsilon-1}dx d\delta \\ 
             &= \int_0^\infty \delta^{-\frac{d}{2}}e^{-\pi\delta}\delta^{\epsilon-1}\frac{(2\pi)^{\frac{d}{2}}(2\delta)^{\frac{d}{2}}}{\pi^{\frac{d}{2}}}\int_{\R^d}\frac{1}{(2\pi)^{\frac{d}{2}}} e^{-\frac{1}{2}\abs{x}^2} dxd\delta \\
             &= 2^d\int_0^\infty \delta^{\epsilon-1}e^{-\pi\delta}d\delta 
             = 2^d\pi^{1-\epsilon}\frac{1}{\pi}\int_0^\infty e^{-\pi\delta}(\pi\delta)^{\epsilon-1}d(\pi\delta) = 2^d\pi^{-\epsilon}\Gamma(\epsilon) < \infty
@@ -821,13 +820,15 @@
         \begin{split}
             \hat{f}(\xi) &= \int_{\R^d}\int_0^\infty e^{-\frac{\pi}{\delta}\abs{x}^2}\delta^{-\frac{d}{2}}e^{-\pi\delta}\delta^{\epsilon-1}e^{-2\pi i x\cdot\xi}d\delta dx \\ 
             &= \int_0^\infty \delta^{-\frac{d}{2}}e^{-\pi\delta}\delta^{\epsilon-1}(2\pi)^{\frac{d}{2}}e^{-\pi\delta\abs{\xi}^2} \int_{\R^d} \frac{1}{(2\pi)^{\frac{d}{2}}} e^{-\frac{\pi}{\delta}(x+i\delta\xi)^t(x+i\delta\xi)}dx d\delta \\ 
-            &= \int_0^\infty \delta^{-\frac{d}{2}}e^{-\pi\delta}\delta^{\epsilon-1}(2\pi)^{\frac{d}{2}}e^{-\pi\delta\abs{\xi}^2}\pth{\frac{\delta}{2\pi}}^{\frac{d}{2}} \int_{\R^d} \frac{1}{(2\pi)^{\frac{d}{2}}} e^{-\frac{\pi}{\delta}y^ty}dy d\delta \\ 
+            &= \int_0^\infty \delta^{-\frac{d}{2}}e^{-\pi\delta}\delta^{\epsilon-1}(2\pi)^{\frac{d}{2}}e^{-\pi\delta\abs{\xi}^2}\pth{\frac{\delta}{2\pi}}^{\frac{d}{2}} \int_{\R^d} \frac{1}{(2\pi)^{\frac{d}{2}}} e^{-\frac{1}{2}y^ty}dy d\delta \\ 
             &= \int_0^\infty e^{-\pi(1+\abs{\xi}^2)\delta}\delta^{\epsilon-1}d\delta \\
             &= \pi^{-\epsilon}(1+\abs{\xi}^2)^{-\epsilon}\int_0^\infty e^{-\pi(1+\abs{\xi}^2)\delta}\pth{\pi(1+\abs{\xi}^2)\delta}^{\epsilon-1}d\pth{\pi(1+\abs{\xi}^2)\delta} \\
             &= \pi^{-\epsilon} (1+\abs{\xi}^2)^{-\epsilon}\Gamma(\epsilon).
         \end{split}
     \end{equation*}
-    Thus by setting $g(x) = \pi^{-\epsilon}\Gamma(\epsilon)f(x)$, $\hat{g}(\xi) = F(\xi)$. 
+    The second equality follows by Fubini's theorem and the third by the change of variable 
+    $y = \pth{\frac{2\pi}{\delta}}^{\frac{1}{2}}x$. Thus by setting 
+    $g(x) = \pi^\epsilon\pth{\Gamma(\epsilon)}^{-1}f(x)$, $\hat{g}(\xi) = F(\xi)$. 
     Since $f$ is integrable, $g$ is also integrable for each $\epsilon>0$ and hence 
     $F(\xi)$ is the Fourier transform of an $\L^1(\R^d)$ function.
 \end{pf}
