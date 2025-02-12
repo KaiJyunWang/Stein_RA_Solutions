@@ -31,10 +31,12 @@
 }%
 }
 
-\usepackage{palatino}
-\usepackage[T1]{fontenc}
-\usepackage{mathpazo}
-\usepackage{textcomp}
+% \usepackage{palatino}
+% \usepackage[T1]{fontenc}
+% \usepackage{mathpazo}
+% \usepackage{textcomp}
+
+\usepackage[scaled = 0.9]{scholax}
 
 \usepackage{setspace}
 \usepackage{amsmath}%
@@ -63,8 +65,8 @@
 \usepackage{appendix}
 \usepackage{tikz}
 \usepackage{mathrsfs}
-
-
+% Must be loaded after amsmath
+\usepackage[scaled = 0.95,vvarbb]{newtxmath}
 
 
 \newcommand{\hrefb}[3][black]{\href{#2}{\color{#1}{#3}}}%
